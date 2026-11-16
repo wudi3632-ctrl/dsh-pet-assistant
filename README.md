@@ -25,6 +25,35 @@
 
 ## 效果预览
 
+<p align="center">
+  <img src="docs/media/voice-assistant-demo.webp" width="960" alt="真实端到端演示：语音唤醒、本地 ASR、任务拆分、Windows 操作、TTS 回复与结果验收">
+</p>
+
+<p align="center"><b>真实端到端演示：唤醒 → 本地 ASR → 任务拆分 → Windows 操作 → TTS / 气泡 → 4/4 验收</b></p>
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/media/voice-demo-asr.png" width="420" alt="本地 ASR 识别语音指令"></td>
+    <td align="center"><img src="docs/media/voice-demo-task.png" width="420" alt="任务卡片拆分执行步骤"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>本地 ASR 识别指令</b></td>
+    <td align="center"><b>任务卡片逐步执行</b></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/media/voice-demo-action.png" width="420" alt="实际打开记事本并输入文字"></td>
+    <td align="center"><img src="docs/media/voice-demo-complete.png" width="420" alt="TTS 气泡回复并完成结果验收"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>实际操作 Windows</b></td>
+    <td align="center"><b>TTS 回复与结果验收</b></td>
+  </tr>
+</table>
+
+> 演示来自项目真实运行：本地 sherpa-onnx 识别合成语音指令，Windows 白名单动作实际打开记事本并写入文字，任务卡片以真实返回结果完成验收，最后调用 Qwen3-TTS。视频仅做等待段裁切与加速，没有伪造功能状态；画面不包含账号、联系人、密钥或真实聊天。
+
+### 角色状态动画
+
 <table>
   <tr>
     <td align="center"><img src="docs/media/pet-happy.webp" width="280" alt="开心回应动画"></td>
@@ -38,9 +67,9 @@
   </tr>
 </table>
 
-> 动图直接取自项目实际动画资源。语音唤醒后，桌宠会用气泡和 TTS 同步回复；执行鼠标任务时会跑到光标旁，营造“拖着鼠标去操作”的效果。
+> 角色动图直接取自项目实际动画资源。语音唤醒后，桌宠会用气泡和 TTS 同步回复；执行鼠标任务时会跑到光标旁，营造“拖着鼠标去操作”的效果。
 
-> 本项目基于 [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet) 二次开发并保留上游 Git 历史。代码使用 MIT License；仓库内沿用的桌宠动画、图片、字体和声音素材遵循上游的非商用与署名规则，不等同于 MIT 代码授权。
+> [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet) 提供桌宠渲染、角色动画和基础交互；本仓库在保留上游 Git 历史的基础上新增语音链路、任务 UI、Windows 自动化与结果验证。代码使用 MIT License；仓库内沿用的桌宠动画、图片、字体和声音素材遵循上游的非商用与署名规则，不等同于 MIT 代码授权。
 
 ## 能做什么
 
