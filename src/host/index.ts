@@ -28,6 +28,8 @@ import { TODO_FILE_NAME, TodoStore } from './todo/store.ts';
 import { join } from 'node:path';
 import type { PetRouteDeps } from './routes/types.ts';
 import { createPetAgentBridge } from './plugin/agent-bridge.ts';
+import { DesktopTaskBroker } from './plugin/desktop-task-broker.ts';
+import { registerPetAgentTools } from './plugin/agent-tools.ts';
 
 /** 插件行 id（与 cordis.patch.yml 一致） */
 export const name = 'pet';
@@ -86,6 +88,8 @@ export function apply(ctx: any): void {
   // 待办清单：一份用户级数据（不分宠物），落盘在插件数据根；提醒循环与 /todos 路由共用同一个实例。
   const todos = new TodoStore({ file: join(userRoot, TODO_FILE_NAME), log });
   const localAsr = createLocalAsr({ log });
+  const desktopTaskBroker = new DesktopTaskBroker();
+  registerPetAgentTools({ ctx, broker: desktopTaskBroker, log, optionalService: setup.optionalService });
   ctx.effect(() => () => localAsr.dispose(), 'dsh-pet: local asr');
   if (readAllConfig(configPaths).main?.speechEngine === 'qwen3') {
     void prepareQwenService().catch((error) =>
@@ -115,7 +119,13 @@ export function apply(ctx: any): void {
     ...sessionNotify,
     ctx,
     todos,
-    agentBridge: createPetAgentBridge({ ctx, log, optionalService: setup.optionalService }),
+    desktopTaskBroker,
+    agentBridge: createPetAgentBridge({
+      ctx,
+      log,
+      optionalService: setup.optionalService,
+      cwd: String(readAllConfig(configPaths).main?.voiceAgentCwd || ''),
+    }),
     // 语音合成：缓存落 userRoot，失败只留日志，不打断宿主
     voice: createVoiceService({
       userRoot,

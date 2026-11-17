@@ -7,11 +7,12 @@ test('submits a voice turn through one persistent DSH session with low reasoning
   const prompts: unknown[] = [];
   const selections: unknown[] = [];
   let exists = false;
+  const expectedSessionId = 'session-dsh-pet-assistant-35c193d8bdbf';
   const agent = {
     async whenIdle() {
       for (const listener of listeners) {
         listener(
-          { id: 'session-dsh-pet-assistant' },
+          { id: expectedSessionId },
           {
             type: 'assistant/message',
             data: { message: { content: [{ type: 'text', text: '已经打开计算器。' }] } },
@@ -53,7 +54,7 @@ test('submits a voice turn through one persistent DSH session with low reasoning
   const result = await bridge.submit('打开计算器', 'vw-test-1');
   assert.deepEqual(result, {
     ok: true,
-    sessionId: 'session-dsh-pet-assistant',
+    sessionId: expectedSessionId,
     text: '已经打开计算器。',
   });
   assert.equal(prompts.length, 1);

@@ -62,6 +62,7 @@ export const GLOBAL_DEFAULT_KEYS = [
   'voiceWakeWords',
   'voiceWakeDevicePattern',
   'voiceWakeActiveMs',
+  'voiceAgentCwd',
   'windowsControlEnabled',
   'windowsPointerAnimation',
   'whisperImageEnabled',

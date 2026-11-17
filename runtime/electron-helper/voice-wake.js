@@ -67,6 +67,9 @@ function createVoiceWakeController(cfg) {
   let pendingAgentInput = null;
   let pendingMessageDraft = null;
   let operatorTaskCounter = 0;
+  let desktopTaskTimer = null;
+  let desktopTaskPolling = false;
+  let suppressOutcomeSpeech = false;
   const turnGate = VC.createTurnGate(128);
 
   const sessionContext = () => ({
@@ -435,7 +438,7 @@ function createVoiceWakeController(cfg) {
   }
   function speakOutcome(text) {
     const value = String(text || '').trim();
-    if (!value || typeof S.speakText !== 'function') return;
+    if (suppressOutcomeSpeech || !value || typeof S.speakText !== 'function') return;
     S.speakText(value, (phase) => {
       if (disposed) return;
       if (phase === 'loading') show('thinking', value);
@@ -932,6 +935,60 @@ function createVoiceWakeController(cfg) {
       activate();
     }
   }
+  async function runDelegatedDesktopPlan(plan) {
+    commandBusy = true;
+    activate();
+    const displaySteps = [...plan.steps, { type: 'verify' }];
+    const task = startOperatorTask(plan.goal, displaySteps);
+    try {
+      show('executing', '正在执行：' + stepLabel(plan.steps[0]));
+      const executed = await executeWindowsPlan(plan, null, false, task, 0, 0, false);
+      updateOperatorTask(task, 'step-start', displaySteps.length - 1);
+      const last = executed[executed.length - 1]?.result;
+      if (!last?.ok) throw new Error(last?.message || '操作没有完成');
+      updateOperatorTask(task, 'step-completed', displaySteps.length - 1);
+      updateOperatorTask(task, 'completed', displaySteps.length - 1);
+      show('success', '✓ ' + (last.message || '任务已完成'), 1800);
+      return { ok: true, message: last.message || '任务已完成' };
+    } finally {
+      commandBusy = false;
+      activate();
+    }
+  }
+  async function pollDesktopTask() {
+    if (disposed || desktopTaskPolling || commandBusy) return;
+    desktopTaskPolling = true;
+    let task = null;
+    try {
+      const response = await fetch(BASE + '/agent/desktop-task/next', { cache: 'no-store' });
+      if (!response.ok) return;
+      task = (await response.json())?.task;
+      if (!task?.id || !task?.goal) return;
+      suppressOutcomeSpeech = true;
+      let result;
+      try {
+        const fastPlan = VC.delegatedDesktopFastPath(String(task.goal));
+        log('desktop-task-claimed', { id: task.id, fastPath: Boolean(fastPlan), chars: String(task.goal).length });
+        result = fastPlan
+          ? await runDelegatedDesktopPlan(fastPlan)
+          : await runWindowsAgent(String(task.goal), sprite());
+      } catch (error) {
+        result = { ok: false, message: error?.message || String(error) };
+      } finally {
+        suppressOutcomeSpeech = false;
+      }
+      await fetch(BASE + '/agent/desktop-task/result', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: task.id, result }),
+      });
+      log('desktop-task-reported', { id: task.id, ok: result?.ok === true });
+    } catch (error) {
+      if (task?.id) log('desktop-task-bridge-error', { message: error?.message || String(error) });
+    } finally {
+      desktopTaskPolling = false;
+    }
+  }
   async function handleText(text, turnId) {
     if (!turnGate.accept(turnId)) {
       log('turn-duplicate-suppressed', { turnId });
@@ -1149,6 +1206,8 @@ function createVoiceWakeController(cfg) {
     return current;
   }
   async function start() {
+    desktopTaskTimer = setInterval(() => void pollDesktopTask(), 450);
+    void pollDesktopTask();
     show('waiting', '正在申请麦克风…');
     try {
       stream = await acquireStream();
@@ -1230,6 +1289,7 @@ function createVoiceWakeController(cfg) {
   function dispose() {
     disposed = true; abort?.abort(); onVoiceEvent?.(); if (statusTimer !== null) clearTimeout(statusTimer);
     if (activeTimer !== null) clearTimeout(activeTimer);
+    if (desktopTaskTimer !== null) clearInterval(desktopTaskTimer);
     window.petBridge?.setWindowsActionProgressHandler?.(null);
     if (pageTimer !== null) clearInterval(pageTimer);
     if (processor) processor.onaudioprocess = null;

@@ -140,6 +140,26 @@
     return aliases[name] ? { type: 'close_app', app: aliases[name], name } : { type: 'close_app_name', name };
   }
 
+  function delegatedDesktopFastPath(input) {
+    const source = correctKnownTerms(String(input || '').trim());
+    if (!source) return null;
+    const clauses = source.split(/[，,。；;\n]+/u).map((part) => part.trim()).filter(Boolean);
+    const first = clauses.shift() || '';
+    const remainder = clauses.join('，');
+    // A fast path may absorb verification/reporting language, but never a second requested action.
+    if (remainder && /(?:打开|关闭|点击|输入|填写|写入|编辑|搜索|播放|发送|拖动|滚动|选择)/u.test(remainder)) return null;
+    const close = closeApplicationIntent(first);
+    if (close) return { goal: source, steps: [close] };
+    const match = first.match(/^(?:帮我|请|麻烦)?(?:打开|启动|运行)\s*(?:Windows\s*)?(.+?)(?:窗口|软件|应用)?(?:并?(?:放到|显示在)?(?:桌面)?最前方)?$/iu);
+    if (!match) return null;
+    const name = String(match[1] || '').trim();
+    if (!name || name.length > 80 || !/^[\p{L}\p{N}_\- .（）()]+$/u.test(name)) return null;
+    if (/(卸载|终端|命令提示符|PowerShell|注册表|控制面板|安全中心|管理员工具|脚本)/iu.test(name)) return null;
+    const aliases = { 记事本: 'notepad', 计算器: 'calculator', 资源管理器: 'explorer', 文件管理器: 'explorer', 设置: 'settings', 画图: 'paint', 浏览器: 'browser', 微信: 'wechat', QQ: 'qq' };
+    const action = aliases[name] ? { type: 'open_app', app: aliases[name] } : { type: 'open_app_name', name };
+    return { goal: source, steps: [action] };
+  }
+
   function routeVoiceIntent(input, context) {
     const source = correctKnownTerms(String(input || '').trim());
     const compacted = compact(source);
@@ -195,7 +215,7 @@
 
   return {
     compact, correctKnownTerms, wakeMatch, parseMessageIntent, messageFollowupContent,
-    vadProfile, windowsPlanBody, browserSearchIntent, closeApplicationIntent, routeVoiceIntent, sessionCanHearWithoutWake,
+    vadProfile, windowsPlanBody, browserSearchIntent, closeApplicationIntent, delegatedDesktopFastPath, routeVoiceIntent, sessionCanHearWithoutWake,
     resolveActiveMs, voiceCaptureMode, createTurnGate,
   };
 });

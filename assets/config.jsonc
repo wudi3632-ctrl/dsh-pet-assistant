@@ -105,8 +105,11 @@
   "voiceWakeWords": ["大肥鱼", "鲸鲸", "小鲸鱼", "小鲸"],
   // 可选的输入设备名称片段。空串使用系统默认；远控可写 "UU远程" 明确选择虚拟麦克风。
   "voiceWakeDevicePattern": "",
-  // 唤醒后 8 秒内可连续说下一句，不必重复喊名字。
-  "voiceWakeActiveMs": 8000,
+  // 唤醒后 30 秒内可连续说下一句，不必重复喊名字。
+  "voiceWakeActiveMs": 30000,
+  // DSH Agent 执行电脑任务时使用的工作目录。空串使用 DSH 默认目录；Windows 操作若遇到目录权限错误，
+  // 请改成一个已在 DSH 中正常使用的绝对工作区路径。
+  "voiceAgentCwd": "",
   // 只开放结构化白名单：软件启动、可访问控件点击/拖拽与用户明确给出的坐标；不接受任意 Shell。
   "windowsControlEnabled": true,
   "windowsPointerAnimation": true,

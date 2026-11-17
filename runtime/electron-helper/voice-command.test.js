@@ -3,7 +3,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const {
   correctKnownTerms, wakeMatch, parseMessageIntent, messageFollowupContent, vadProfile, windowsPlanBody,
-  browserSearchIntent, closeApplicationIntent, routeVoiceIntent, sessionCanHearWithoutWake,
+  browserSearchIntent, closeApplicationIntent, delegatedDesktopFastPath, routeVoiceIntent, sessionCanHearWithoutWake,
   resolveActiveMs, voiceCaptureMode, createTurnGate,
 } = require('./voice-command.js');
 
@@ -61,6 +61,18 @@ test('routes natural browser and weather requests into real Windows work', () =>
   assert.deepEqual(closeApplicationIntent('关闭浏览器吧'), { type: 'close_app', app: 'browser', name: '浏览器' });
   assert.deepEqual(closeApplicationIntent('关掉网易云音乐'), { type: 'close_app_name', name: '网易云音乐' });
   assert.equal(routeVoiceIntent('今天心情怎么样').type, 'chat');
+});
+
+test('uses deterministic desktop actions for delegated open and close tasks', () => {
+  assert.deepEqual(delegatedDesktopFastPath('打开 Windows 计算器，确认计算器窗口已经显示在桌面最前方后告诉我结果'), {
+    goal: '打开 Windows 计算器，确认计算器窗口已经显示在桌面最前方后告诉我结果',
+    steps: [{ type: 'open_app', app: 'calculator' }],
+  });
+  assert.deepEqual(delegatedDesktopFastPath('请关闭浏览器'), {
+    goal: '请关闭浏览器',
+    steps: [{ type: 'close_app', app: 'browser', name: '浏览器' }],
+  });
+  assert.equal(delegatedDesktopFastPath('打开浏览器，然后搜索成都天气'), null);
 });
 
 test('keeps an active task audible past idle timeout and supports explicit sleep', () => {

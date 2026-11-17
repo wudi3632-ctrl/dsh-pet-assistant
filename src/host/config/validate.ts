@@ -8,6 +8,7 @@
 import { FONT_SIZE_MAX, FONT_SIZE_MIN } from '../../shared/fonts.ts';
 import { isKnownVoice } from '../voice/voices.ts';
 import { FONT_FAMILY_SET } from './constants.ts';
+import { isAbsolute } from 'node:path';
 
 /** animations 段完整性校验（与旧 assertAnimationsHost 同一套规则；不 throw，非法返回 false） */
 function animationsValid(a: unknown): boolean {
@@ -202,6 +203,8 @@ export function topFieldValid(key: string, value: unknown): boolean {
       const n = Number(value);
       return Number.isFinite(n) && n >= 2000 && n <= 30000;
     }
+    case 'voiceAgentCwd':
+      return typeof value === 'string' && value.length <= 512 && (value === '' || isAbsolute(value));
     case 'chatImageEnabled':
       return typeof value === 'boolean';
     case 'chatAnimationEnabled':

@@ -296,6 +296,18 @@ export function createChatMemory(deps: ChatMemoryInput) {
         onTrace: (stage, data) => trace(traceId, stage, data),
       });
       if (!generated.ok) return generated;
+      // Windows planning is an internal tool turn, not a pet conversation turn. Publishing or persisting it would
+      // make the helper speak the planner's text before the owning DSH Agent gives its single final response.
+      if (windowsAgent) {
+        return {
+          ok: true as const,
+          text: generated.text,
+          ...(generated.windowsPlan ? { windowsPlan: generated.windowsPlan } : {}),
+          emotion: generated.emotion,
+          speed: generated.speed,
+          tag: generated.tag,
+        };
+      }
       const now = Date.now();
       // 图信息只存不送：记忆要能还原「这一轮带过图、配过哪张」（聊天记录存档），
       // 但历史回放一律只带正文——否则每轮都会把旧图重发一遍给模型。

@@ -1,9 +1,10 @@
 /** Submit pet voice turns through the normal DSH Session/Agent pipeline. */
 import { lastAssistantText } from '../notify-events.ts';
 import type { FileLogger } from '../log-file.ts';
+import { createHash } from 'node:crypto';
 
-const PET_AGENT_SESSION_ID = 'session-dsh-pet-assistant';
 const TURN_TIMEOUT_MS = 10 * 60_000;
+const PET_SESSION_SCHEMA = 'desktop-v2';
 
 type SessionController = {
   create(request: { sessionId?: string; cwd?: string }): Promise<{ sessionId: string }>;
@@ -39,9 +40,15 @@ export function createPetAgentBridge(input: {
   ctx: AgentBridgeContext;
   log: FileLogger;
   optionalService(name: string): unknown;
+  cwd?: string;
 }) {
   const { ctx, log, optionalService } = input;
-  let sessionId = PET_AGENT_SESSION_ID;
+  const cwd = input.cwd?.trim() || undefined;
+  const scope = createHash('sha256')
+    .update(PET_SESSION_SCHEMA + '|' + (cwd ?? 'default').toLocaleLowerCase())
+    .digest('hex')
+    .slice(0, 12);
+  let sessionId = 'session-dsh-pet-assistant-' + scope;
   let ready: Promise<string> | undefined;
   let queue = Promise.resolve();
 
@@ -55,7 +62,7 @@ export function createPetAgentBridge(input: {
   const ensureSession = async (service: SessionController): Promise<string> => {
     const resolved = await service.resolveAgent(sessionId);
     if ('error' in resolved) {
-      const created = await service.create({ sessionId });
+      const created = await service.create({ sessionId, ...(cwd ? { cwd } : {}) });
       sessionId = created.sessionId;
     }
     const selected = ctx.agentDefaultModel.currentSelection();
