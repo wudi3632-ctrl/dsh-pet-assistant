@@ -955,6 +955,34 @@ function createVoiceWakeController(cfg) {
       activate();
     }
   }
+  async function runDelegatedDesktopAction(action) {
+    commandBusy = true;
+    activate();
+    const task = startOperatorTask('执行桌面操作', [action, { type: 'verify' }]);
+    try {
+      updateOperatorTask(task, 'step-start', 0);
+      show('executing', '正在执行：' + stepLabel(action));
+      const result = await window.petBridge.runWindowsAction(action);
+      if (!result?.ok) {
+        const reason = result?.confirmationRequired ? '这个关键操作需要用户确认' : result?.message || '操作没有完成';
+        updateOperatorTask(task, 'failed', 0, reason);
+        return {
+          ok: false,
+          message: reason,
+          ...(result?.confirmationRequired ? { blocked: true, reason: 'confirmation-required' } : {}),
+        };
+      }
+      updateOperatorTask(task, 'step-completed', 0);
+      updateOperatorTask(task, 'step-start', 1);
+      updateOperatorTask(task, 'step-completed', 1);
+      updateOperatorTask(task, 'completed', 1);
+      show('success', '✓ ' + (result.message || '操作已完成'), 1600);
+      return { ok: true, message: result.message || '操作已完成' };
+    } finally {
+      commandBusy = false;
+      activate();
+    }
+  }
   async function pollDesktopTask() {
     if (disposed || desktopTaskPolling || commandBusy) return;
     desktopTaskPolling = true;
@@ -963,15 +991,26 @@ function createVoiceWakeController(cfg) {
       const response = await fetch(BASE + '/agent/desktop-task/next', { cache: 'no-store' });
       if (!response.ok) return;
       task = (await response.json())?.task;
-      if (!task?.id || !task?.goal) return;
+      if (!task?.id || !['goal', 'observe', 'action'].includes(task.kind)) return;
       suppressOutcomeSpeech = true;
       let result;
       try {
-        const fastPlan = VC.delegatedDesktopFastPath(String(task.goal));
-        log('desktop-task-claimed', { id: task.id, fastPath: Boolean(fastPlan), chars: String(task.goal).length });
-        result = fastPlan
-          ? await runDelegatedDesktopPlan(fastPlan)
-          : await runWindowsAgent(String(task.goal), sprite());
+        if (task.kind === 'observe') {
+          log('desktop-task-claimed', { id: task.id, kind: task.kind });
+          const observation = await window.petBridge.captureScreen();
+          result = observation
+            ? { ok: true, message: '已截取当前桌面', observation }
+            : { ok: false, message: '无法截取当前桌面' };
+        } else if (task.kind === 'action') {
+          log('desktop-task-claimed', { id: task.id, kind: task.kind, type: String(task.action?.type || '') });
+          result = await runDelegatedDesktopAction(task.action);
+        } else {
+          const fastPlan = VC.delegatedDesktopFastPath(String(task.goal));
+          log('desktop-task-claimed', { id: task.id, kind: task.kind, fastPath: Boolean(fastPlan), chars: String(task.goal).length });
+          result = fastPlan
+            ? await runDelegatedDesktopPlan(fastPlan)
+            : await runWindowsAgent(String(task.goal), sprite());
+        }
       } catch (error) {
         result = { ok: false, message: error?.message || String(error) };
       } finally {

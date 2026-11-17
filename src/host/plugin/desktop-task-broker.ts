@@ -7,11 +7,27 @@ export type DesktopTaskResult = {
   blocked?: boolean;
   pending?: boolean;
   reason?: string;
+  observation?: {
+    mediaType: 'image/jpeg' | 'image/png' | 'image/webp';
+    data: string;
+    width: number;
+    height: number;
+    bytes: number;
+    screenWidth?: number;
+    screenHeight?: number;
+    originX?: number;
+    originY?: number;
+  };
 };
+
+export type DesktopTaskRequest =
+  | { kind: 'goal'; goal: string }
+  | { kind: 'observe' }
+  | { kind: 'action'; action: Record<string, unknown> };
 
 type PendingTask = {
   id: string;
-  goal: string;
+  request: DesktopTaskRequest;
   claimed: boolean;
   resolve(result: DesktopTaskResult): void;
   reject(error: unknown): void;
@@ -26,9 +42,13 @@ export class DesktopTaskBroker {
   }
 
   submit(goal: string, signal: AbortSignal): Promise<DesktopTaskResult> {
+    return this.submitRequest({ kind: 'goal', goal }, signal);
+  }
+
+  submitRequest(request: DesktopTaskRequest, signal: AbortSignal): Promise<DesktopTaskResult> {
     if (pendingTasks.has(this)) return Promise.resolve({ ok: false, message: '桌面助手正在执行另一项任务' });
     return new Promise((resolve, reject) => {
-      const task: PendingTask = { id: randomUUID(), goal, claimed: false, resolve, reject, signal };
+      const task: PendingTask = { id: randomUUID(), request, claimed: false, resolve, reject, signal };
       pendingTasks.set(this, task);
       signal.addEventListener(
         'abort',
@@ -41,11 +61,11 @@ export class DesktopTaskBroker {
     });
   }
 
-  claim(): { id: string; goal: string } | null {
+  claim(): ({ id: string } & DesktopTaskRequest) | null {
     const task = pendingTasks.get(this);
     if (!task || task.claimed || task.signal.aborted) return null;
     task.claimed = true;
-    return { id: task.id, goal: task.goal };
+    return { id: task.id, ...task.request };
   }
 
   complete(id: string, result: DesktopTaskResult): boolean {

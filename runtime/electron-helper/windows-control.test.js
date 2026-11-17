@@ -6,6 +6,7 @@ const { highRisk, isProgress, validateAction } = require('./windows-control.js')
 
 test('accepts the fixed low-risk action schema', () => {
   assert.deepEqual(validateAction({ type: 'open_app', app: 'NOTEPAD' }), { type: 'open_app', app: 'notepad' });
+  assert.deepEqual(validateAction({ type: 'type_text', text: '你好' }), { type: 'type_text', target: '编辑区', text: '你好' });
   assert.deepEqual(validateAction({ type: 'open_app_name', name: '网易云音乐' }), { type: 'open_app_name', name: '网易云音乐' });
   assert.deepEqual(validateAction({ type: 'close_app', app: 'browser' }), { type: 'close_app', app: 'browser' });
   assert.deepEqual(validateAction({ type: 'close_app_name', name: '网易云音乐' }), { type: 'close_app_name', name: '网易云音乐' });

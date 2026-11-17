@@ -7,7 +7,7 @@ test('submits a voice turn through one persistent DSH session with low reasoning
   const prompts: unknown[] = [];
   const selections: unknown[] = [];
   let exists = false;
-  const expectedSessionId = 'session-dsh-pet-assistant-35c193d8bdbf';
+  const expectedSessionId = 'session-dsh-pet-assistant-c468b3b0a001';
   const agent = {
     async whenIdle() {
       for (const listener of listeners) {
@@ -61,7 +61,7 @@ test('submits a voice turn through one persistent DSH session with low reasoning
   assert.equal((prompts[0] as { requestId: string }).requestId, 'vw-test-1');
   assert.match(
     (prompts[0] as { content: Array<{ text: string }> }).content[0]?.text ?? '',
-    /pet_desktop_task[\s\S]*打开计算器/,
+    /pet_desktop_observe[\s\S]*pet_desktop_action[\s\S]*打开计算器/,
   );
   assert.equal((selections[0] as { reasoningEffort: string }).reasoningEffort, 'low');
 });

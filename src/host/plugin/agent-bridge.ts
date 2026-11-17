@@ -4,9 +4,9 @@ import type { FileLogger } from '../log-file.ts';
 import { createHash } from 'node:crypto';
 
 const TURN_TIMEOUT_MS = 10 * 60_000;
-const PET_SESSION_SCHEMA = 'desktop-v2';
+const PET_SESSION_SCHEMA = 'desktop-v3';
 const PET_DESKTOP_DIRECTIVE =
-  '[桌宠会话约束] 如果用户要求操作可见 Windows 界面，第一步必须直接调用 pet_desktop_task；不要先用 Shell、进程枚举或脚本推断桌面是否存在。工具返回成功后立即简短汇报，不要重复执行或另行验证。\n\n';
+  '[桌宠会话约束] 如果用户要求操作可见 Windows 界面，不要使用 Shell、进程枚举、剪贴板或脚本。只有单纯打开/关闭软件才使用 pet_desktop_task；复杂任务必须使用 pet_desktop_observe → pet_desktop_action（每次只做一步）→ pet_desktop_observe 验证，失败时也不得回退到 pet_desktop_task。type_text 可以不传 target，它会自动找当前窗口的可编辑区，无需先点击或使用剪贴板。工具成功后立即简短汇报，不要重复执行。\n\n';
 
 type SessionController = {
   create(request: { sessionId?: string; cwd?: string }): Promise<{ sessionId: string }>;

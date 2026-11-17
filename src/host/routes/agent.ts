@@ -20,12 +20,18 @@ export async function handleAgentRoutes(deps: PetRouteDeps, input: RouteInput): 
     const raw = body.result;
     if (!id || !raw || typeof raw !== 'object') return failResult('bad-request', '桌面任务结果非法');
     const result = raw as Record<string, unknown>;
+    const observation = result.observation;
+    const parsedObservation =
+      observation && typeof observation === 'object'
+        ? parseObservation(observation as Record<string, unknown>)
+        : undefined;
     const accepted = deps.desktopTaskBroker?.complete(id, {
       ok: result.ok === true,
       ...(typeof result.message === 'string' ? { message: result.message } : {}),
       ...(result.blocked === true ? { blocked: true } : {}),
       ...(result.pending === true ? { pending: true } : {}),
       ...(typeof result.reason === 'string' ? { reason: result.reason } : {}),
+      ...(parsedObservation ? { observation: parsedObservation } : {}),
     });
     return accepted ? okResult({ ok: true }) : failResult('bad-request', '桌面任务已过期');
   }
@@ -46,4 +52,43 @@ export async function handleAgentRoutes(deps: PetRouteDeps, input: RouteInput): 
   }
   const result = await deps.agentBridge.submit(text, turnId, input.signal);
   return result.ok ? okResult(result) : failResult('generate-error', result.message);
+}
+
+function parseObservation(raw: Record<string, unknown>) {
+  const mediaType = raw.mediaType;
+  const data = raw.data;
+  const width = Number(raw.width);
+  const height = Number(raw.height);
+  const bytes = Number(raw.bytes);
+  if (
+    !['image/jpeg', 'image/png', 'image/webp'].includes(String(mediaType)) ||
+    typeof data !== 'string' ||
+    data.length === 0 ||
+    data.length > 6_000_000 ||
+    !Number.isInteger(width) ||
+    !Number.isInteger(height) ||
+    !Number.isInteger(bytes) ||
+    width < 1 ||
+    height < 1 ||
+    width > 8192 ||
+    height > 8192 ||
+    bytes < 1
+  ) {
+    return undefined;
+  }
+  const optionalNumber = (key: string): number | undefined => {
+    const value = Number(raw[key]);
+    return Number.isFinite(value) ? value : undefined;
+  };
+  return {
+    mediaType: mediaType as 'image/jpeg' | 'image/png' | 'image/webp',
+    data,
+    width,
+    height,
+    bytes,
+    ...(optionalNumber('screenWidth') !== undefined ? { screenWidth: optionalNumber('screenWidth') } : {}),
+    ...(optionalNumber('screenHeight') !== undefined ? { screenHeight: optionalNumber('screenHeight') } : {}),
+    ...(optionalNumber('originX') !== undefined ? { originX: optionalNumber('originX') } : {}),
+    ...(optionalNumber('originY') !== undefined ? { originY: optionalNumber('originY') } : {}),
+  };
 }

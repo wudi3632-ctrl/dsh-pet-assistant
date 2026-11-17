@@ -24,12 +24,31 @@ test('a pending task can only be claimed once', async () => {
   const result = broker.submit('打开计算器', controller.signal);
 
   const claimed = broker.claim();
-  assert.ok(claimed);
+  assert.ok(claimed && claimed.kind === 'goal');
   assert.equal(claimed.goal, '打开计算器');
   assert.equal(broker.claim(), null);
 
   controller.abort();
   await assert.rejects(result);
+});
+
+test('passes observation and action requests to the desktop helper without reshaping them', async () => {
+  const broker = new DesktopTaskBroker();
+  const controller = new AbortController();
+  const observed = broker.submitRequest({ kind: 'observe' }, controller.signal);
+  const observationTask = broker.claim();
+  assert.ok(observationTask);
+  assert.equal(observationTask.kind, 'observe');
+  assert.equal(broker.complete(observationTask.id, { ok: true, message: '已截图' }), true);
+  await observed;
+
+  const action = { type: 'click_point', x: 100, y: 200 };
+  const acted = broker.submitRequest({ kind: 'action', action }, new AbortController().signal);
+  const actionTask = broker.claim();
+  assert.ok(actionTask && actionTask.kind === 'action');
+  assert.deepEqual(actionTask.action, action);
+  broker.complete(actionTask.id, { ok: true, message: '点击完成' });
+  await acted;
 });
 
 test('completing the claimed task resolves the submitter and clears the broker', async () => {

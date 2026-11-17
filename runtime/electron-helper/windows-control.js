@@ -88,8 +88,11 @@ function validateAction(raw, options = {}) {
     && (raw.target === undefined || (safeText(raw.target) && safeRisk(raw.target)))) {
     return { type, amount: raw.amount, ...(raw.target === undefined ? {} : { target: raw.target.trim() }) };
   }
-  if (type === 'type_text' && safeText(raw.target) && safeInput(raw.text) && safeRisk(raw.target + raw.text)) {
-    return { type, target: raw.target.trim(), text: raw.text };
+  if (type === 'type_text') {
+    const target = raw.target === undefined ? '编辑区' : raw.target;
+    if (safeText(target) && safeInput(raw.text) && safeRisk(String(target) + raw.text)) {
+      return { type, target: String(target).trim(), text: raw.text };
+    }
   }
   if (type === 'hotkey' && typeof raw.keys === 'string' && ALLOWED_HOTKEYS.has(raw.keys.toLowerCase())) {
     return { type, keys: raw.keys.toLowerCase() };
