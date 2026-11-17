@@ -59,6 +59,10 @@ test('submits a voice turn through one persistent DSH session with low reasoning
   });
   assert.equal(prompts.length, 1);
   assert.equal((prompts[0] as { requestId: string }).requestId, 'vw-test-1');
+  assert.match(
+    (prompts[0] as { content: Array<{ text: string }> }).content[0]?.text ?? '',
+    /pet_desktop_task[\s\S]*打开计算器/,
+  );
   assert.equal((selections[0] as { reasoningEffort: string }).reasoningEffort, 'low');
 });
 
