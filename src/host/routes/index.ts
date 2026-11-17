@@ -7,6 +7,7 @@
  * @module dsh-pet/src/host/routes/index
  */
 import type { RouteResult } from '../http.ts';
+import { handleAgentRoutes } from './agent.ts';
 import { handleAssetsRoutes } from './assets.ts';
 import { handleAttachmentRoutes } from './attachment.ts';
 import { handleAvatarRoutes } from './avatar.ts';
@@ -37,6 +38,7 @@ const HANDLERS: readonly RouteHandler[] = [
   handleMotionRoutes,
   handlePlaybackRoutes,
   handleSleepRoutes,
+  handleAgentRoutes,
   handleChatRoutes,
   handleAttachmentRoutes,
   handleTodoRoutes,

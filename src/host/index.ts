@@ -27,6 +27,7 @@ import { prepareQwenService } from './voice/qwen3.ts';
 import { TODO_FILE_NAME, TodoStore } from './todo/store.ts';
 import { join } from 'node:path';
 import type { PetRouteDeps } from './routes/types.ts';
+import { createPetAgentBridge } from './plugin/agent-bridge.ts';
 
 /** 插件行 id（与 cordis.patch.yml 一致） */
 export const name = 'pet';
@@ -114,6 +115,7 @@ export function apply(ctx: any): void {
     ...sessionNotify,
     ctx,
     todos,
+    agentBridge: createPetAgentBridge({ ctx, log, optionalService: setup.optionalService }),
     // 语音合成：缓存落 userRoot，失败只留日志，不打断宿主
     voice: createVoiceService({
       userRoot,

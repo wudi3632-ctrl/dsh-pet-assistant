@@ -166,8 +166,36 @@
     return Boolean(context?.awaitingInput || context?.awaitingConfirmation || context?.executing || context?.verifying);
   }
 
+  function resolveActiveMs(value) {
+    const parsed = Number(value);
+    if (!Number.isFinite(parsed)) return 30000;
+    return Math.min(300000, Math.max(5000, Math.round(parsed)));
+  }
+
+  function voiceCaptureMode(now, speaking, cooldownUntil) {
+    return speaking || Number(now) < Number(cooldownUntil) ? 'keyword-only' : 'normal';
+  }
+
+  function createTurnGate(limit) {
+    const maximum = Number.isInteger(limit) && limit > 0 ? limit : 128;
+    const accepted = new Set();
+    return {
+      accept(turnId) {
+        const id = String(turnId || '').trim();
+        if (!id || accepted.has(id)) return false;
+        accepted.add(id);
+        while (accepted.size > maximum) accepted.delete(accepted.values().next().value);
+        return true;
+      },
+      has(turnId) {
+        return accepted.has(String(turnId || '').trim());
+      },
+    };
+  }
+
   return {
     compact, correctKnownTerms, wakeMatch, parseMessageIntent, messageFollowupContent,
     vadProfile, windowsPlanBody, browserSearchIntent, closeApplicationIntent, routeVoiceIntent, sessionCanHearWithoutWake,
+    resolveActiveMs, voiceCaptureMode, createTurnGate,
   };
 });

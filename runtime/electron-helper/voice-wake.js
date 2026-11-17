@@ -18,7 +18,8 @@ function createVoiceWakeController(cfg) {
     .map((word) => String(word).trim())
     .filter(Boolean);
   // 一次唤醒后维持自然连续会话；任务等待状态不受空闲窗口影响。
-  const activeMs = 30000;
+  const activeMs = VC.resolveActiveMs(cfg.voiceWakeActiveMs);
+  const ttsCooldownMs = 350;
   const sampleRate = 16000;
   const calibrationMs = 1800;
   const minSpeechMs = 350;
@@ -35,8 +36,8 @@ function createVoiceWakeController(cfg) {
   let busy = false;
   let commandBusy = false;
   let speaking = false;
-  let ttsStartedAt = 0;
-  let bargeStartedAt = 0;
+  let ttsCooldownUntil = 0;
+  let wakeInterruptingTts = false;
   let lastTtsText = '';
   let lastTtsInterruptedAt = 0;
   let activeUntil = 0;
@@ -66,6 +67,7 @@ function createVoiceWakeController(cfg) {
   let pendingAgentInput = null;
   let pendingMessageDraft = null;
   let operatorTaskCounter = 0;
+  const turnGate = VC.createTurnGate(128);
 
   const sessionContext = () => ({
     awaitingInput: Boolean(pendingMessageDraft || pendingAgentInput),
@@ -285,13 +287,19 @@ function createVoiceWakeController(cfg) {
     speaking = event.kind === 'start';
     log('tts-' + event.kind);
     if (speaking) {
-      ttsStartedAt = performance.now();
+      wakeInterruptingTts = false;
+      ttsCooldownUntil = 0;
       lastTtsText = event.text;
       show('speaking', event.text);
     }
     else {
+      if (wakeInterruptingTts) {
+        wakeInterruptingTts = false;
+        return;
+      }
+      ttsCooldownUntil = Date.now() + ttsCooldownMs;
       activate();
-      show('listening', '还在听哦…', 2200);
+      show('listening', '好啦，继续说吧～', 2200);
     }
   });
 
@@ -346,8 +354,8 @@ function createVoiceWakeController(cfg) {
     }
     return bytes;
   }
-  function feedKws(input) {
-    if (!kwsAvailable || Date.now() < activeUntil || speaking) return;
+  function feedKws(input, keywordOnly) {
+    if (!kwsAvailable || (!keywordOnly && Date.now() < activeUntil)) return;
     kwsBatch.push(input);
     if (kwsBatch.length < 3) return;
     const parts = kwsBatch;
@@ -359,8 +367,16 @@ function createVoiceWakeController(cfg) {
       });
       const body = await res.json();
       if (body?.ok === true && body.keyword) {
-        if (disposed || speaking || Date.now() < activeUntil) return;
+        if (disposed || (!keywordOnly && Date.now() < activeUntil)) return;
         kwsMatched = String(body.keyword);
+        if (speaking) {
+          wakeInterruptingTts = true;
+          lastTtsInterruptedAt = Date.now();
+          log('tts-wake-interrupt', { keyword: kwsMatched });
+          S.stopVoicePlayback?.();
+          speaking = false;
+          ttsCooldownUntil = 0;
+        }
         activate();
         if (!speechStart && preRoll.length) {
           const buffered = preRoll.splice(0);
@@ -429,6 +445,23 @@ function createVoiceWakeController(cfg) {
         show('listening', '还在听哦…', 2200);
       }
     });
+  }
+  async function submitDshAgentTurn(text, turnId) {
+    show('thinking', '正在交给 DSH 处理…');
+    const response = await fetch(BASE + '/agent/turn', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ text, turnId }),
+    });
+    if (response.status === 404 || response.status === 503) {
+      log('agent-unavailable', { status: response.status });
+      return false;
+    }
+    const result = await response.json();
+    if (!result?.ok) throw new Error(result?.message || 'DSH Agent 任务失败');
+    log('agent-completed', { sessionId: result.sessionId, outputChars: String(result.text || '').length });
+    speakOutcome(result.text || '任务已经处理完成。');
+    return true;
   }
   function windowsIntent(command) {
     const sites = {
@@ -899,7 +932,12 @@ function createVoiceWakeController(cfg) {
       activate();
     }
   }
-  async function handleText(text) {
+  async function handleText(text, turnId) {
+    if (!turnGate.accept(turnId)) {
+      log('turn-duplicate-suppressed', { turnId });
+      return;
+    }
+    log('turn-accepted', { turnId });
     log('asr-result', { chars: String(text || '').length, empty: !text });
     const rawHeard = String(text || '').trim();
     const heard = normalize(rawHeard);
@@ -994,6 +1032,7 @@ function createVoiceWakeController(cfg) {
     }
     sprite()?.operatorTask?.clear?.();
     const pet = sprite();
+    if (await submitDshAgentTurn(rawCommand, turnId)) return;
     const messageIntent = VC.parseMessageIntent(rawCommand);
     if (messageIntent) {
       await executeMessageIntent(messageIntent, pet);
@@ -1063,6 +1102,7 @@ function createVoiceWakeController(cfg) {
     const parts = chunks;
     const samples = parts.reduce((sum, part) => sum + part.length, 0);
     const peak = segmentPeak;
+    const turnId = activeTraceId || newTraceId();
     chunks = []; speechStart = 0; lastVoice = 0; segmentPeak = 0; busy = true;
     log('speech-end', { durationMs: Math.round((samples / sampleRate) * 1000), peak: Number(peak.toFixed(5)) });
     try {
@@ -1076,7 +1116,7 @@ function createVoiceWakeController(cfg) {
       const text = await transcribe(parts);
       // ASR 已经取走本段音频；后续任务可以很久，但麦克风必须立刻恢复以便听到“停下”。
       busy = false;
-      await handleText(text);
+      await handleText(text, turnId);
     } catch (error) {
       if (!disposed) show('error', '呜…' + (error?.message || String(error)), 3500);
     } finally { busy = false; kwsMatched = ''; }
@@ -1130,33 +1170,6 @@ function createVoiceWakeController(cfg) {
         const now = performance.now();
         const input = new Float32Array(event.inputBuffer.getChannelData(0));
         const level = rms(input);
-        if (speaking) {
-          // 给扬声器/AEC 一点稳定时间；随后只接受明显高于底噪的持续人声，降低自身回声误打断。
-          const bargeThreshold = Math.max(0.035, startThreshold * 2.5);
-          if (now - ttsStartedAt >= 800 && level >= bargeThreshold) {
-            if (!bargeStartedAt) bargeStartedAt = now;
-            if (now - bargeStartedAt >= 280) {
-              const interruptedTraceId = activeTraceId;
-              activeTraceId = newTraceId();
-              log('barge-in', { level: Number(level.toFixed(5)), threshold: Number(bargeThreshold.toFixed(5)) });
-              if (interruptedTraceId) log('playback-cancel-requested', { interruptedTraceId });
-              S.stopVoicePlayback?.();
-              speaking = false;
-              lastTtsInterruptedAt = Date.now();
-              activate();
-              speechStart = now;
-              lastVoice = now;
-              segmentPeak = level;
-              chunks = [input];
-              preRoll = [];
-              bargeStartedAt = 0;
-              show('listening', '听到你啦，先听你说～');
-            }
-          } else {
-            bargeStartedAt = 0;
-          }
-          return;
-        }
         if (calibrating) {
           calibrationLevels.push(level);
           if (now - calibrationStarted < calibrationMs) return;
@@ -1176,7 +1189,14 @@ function createVoiceWakeController(cfg) {
           showWaiting();
           return;
         }
-        feedKws(input);
+        const captureMode = VC.voiceCaptureMode(Date.now(), speaking, ttsCooldownUntil);
+        if (captureMode === 'keyword-only') {
+          preRoll.push(input);
+          while (preRoll.length > wakePreRollFrames) preRoll.shift();
+          feedKws(input, true);
+          return;
+        }
+        feedKws(input, false);
         if (!speechStart) {
           preRoll.push(input);
           const inactiveKws = kwsAvailable && !sessionCanHear();

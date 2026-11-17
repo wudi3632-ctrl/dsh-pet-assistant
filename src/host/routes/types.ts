@@ -23,6 +23,7 @@ import type { HearService } from '../voice/hear.ts';
 import type { VoiceService } from '../voice/speak.ts';
 import type { WorkStatusStore } from '../work-status.ts';
 import type { PetEmotion, PetSpeed, PetVoiceTag } from '../../shared/performance.ts';
+import type { PetAgentBridge } from '../plugin/agent-bridge.ts';
 
 /** 一次路由调用的输入：URL 已解析，`rest` 是去掉前缀并解码后的路径。 */
 export interface RouteInput {
@@ -76,6 +77,8 @@ export type RouteHandler = (deps: PetRouteDeps, input: RouteInput) => Promise<Ro
  * 唯一有副作用的是 `nextExternalWorkSeq`：它推进外部写入序号并返回新值。
  */
 export interface PetRouteDeps {
+  /** Normal DSH Session/Agent entry used by desktop voice turns. */
+  readonly agentBridge?: PetAgentBridge;
   /** 配置路径集（内置默认 + 用户主配置 + 文件宠物目录）。 */
   readonly configPaths: ConfigPaths;
   /** 第三方右键菜单注册表（进程内存态）。 */

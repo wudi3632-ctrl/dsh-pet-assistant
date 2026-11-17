@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const {
   correctKnownTerms, wakeMatch, parseMessageIntent, messageFollowupContent, vadProfile, windowsPlanBody,
   browserSearchIntent, closeApplicationIntent, routeVoiceIntent, sessionCanHearWithoutWake,
+  resolveActiveMs, voiceCaptureMode, createTurnGate,
 } = require('./voice-command.js');
 
 test('preserves message content after the wake word', () => {
@@ -67,4 +68,26 @@ test('keeps an active task audible past idle timeout and supports explicit sleep
   assert.equal(sessionCanHearWithoutWake(31_000, 30_000, { awaitingConfirmation: true }), true);
   assert.equal(sessionCanHearWithoutWake(31_000, 30_000, {}), false);
   assert.equal(routeVoiceIntent('休息吧').type, 'sleep');
+});
+
+test('honors configured active time with safe bounds', () => {
+  assert.equal(resolveActiveMs(undefined), 30000);
+  assert.equal(resolveActiveMs(45000), 45000);
+  assert.equal(resolveActiveMs(100), 5000);
+  assert.equal(resolveActiveMs(999999), 300000);
+});
+
+test('uses keyword-only capture during TTS and the post-TTS cooldown', () => {
+  assert.equal(voiceCaptureMode(1000, true, 0), 'keyword-only');
+  assert.equal(voiceCaptureMode(1200, false, 1350), 'keyword-only');
+  assert.equal(voiceCaptureMode(1350, false, 1350), 'normal');
+});
+
+test('accepts each final ASR turn exactly once', () => {
+  const gate = createTurnGate(2);
+  assert.equal(gate.accept('turn-1'), true);
+  assert.equal(gate.accept('turn-1'), false);
+  assert.equal(gate.accept('turn-2'), true);
+  assert.equal(gate.accept('turn-3'), true);
+  assert.equal(gate.has('turn-1'), false, 'old ids are evicted from the bounded cache');
 });
