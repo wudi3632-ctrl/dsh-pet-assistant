@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大肥鱼 · 原创桌宠</title><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header><div><span class="eyebrow">DASHIFEIYU PET</span><h1>大肥鱼的小角落</h1></div><button id="settings-toggle" aria-expanded="false">设置与动作</button></header>
+    <p id="connection" role="status">正在检查宿主插件连接…</p>
+    <section class="desktop" aria-label="桌宠舞台">
+      <div id="pet" class="pet" data-motion="idle">
+        <span id="host-badge" class="host-badge" role="status">检查宿主…</span>
+        <div class="stage" id="stage" aria-label="大肥鱼原创动作形象" tabindex="0">
+          <img id="placeholder" src="/assets/placeholder.svg" alt="蓝色小鲸鱼占位形象，等待替换原创动画" draggable="false">
+          <video id="video-a" muted playsinline preload="none"></video><video id="video-b" muted playsinline preload="none"></video>
+        </div>
+        <span id="motion-label" class="motion-label">自然待机 · 占位</span>
+        <div class="bubble" id="bubble" role="status" aria-live="polite" hidden><span id="bubble-text"></span></div>
+      </div>
+      <aside id="task" class="task collapsed" aria-label="当前任务" hidden><div class="task-head"><span class="task-state"><span id="task-icon" aria-hidden="true">·</span><span id="task-status" role="status">处理中</span></span><div class="task-controls"><button id="task-collapse" aria-label="展开任务详情" aria-expanded="false">详情</button><button id="task-close" aria-label="隐藏任务提示">×</button></div></div><strong id="task-title">当前任务</strong><ol id="steps" aria-label="任务步骤"></ol></aside>
+    </section>
+    <form id="chat" class="composer"><label class="sr-only" for="message">对大肥鱼说</label><input id="message" maxlength="2000" placeholder="对大肥鱼说点什么…" autocomplete="off"><button type="submit" id="send">发送</button><button type="button" id="interrupt">打断</button></form>
+    <div class="voice-bar"><button id="mic">启用语音唤醒</button><button id="listen-now">说一句</button><span id="voice-status">麦克风未开启</span><span id="input-level" aria-label="麦克风音量"></span></div>
+    <details id="settings"><summary>连接设置 / 动作检查</summary>
+      <div class="settings-content">
+        <div class="appearance-panel"><label>桌宠形象<select id="character-select" aria-label="桌宠形象"></select></label><div class="appearance-actions"><button id="import-character" type="button">导入动作包 ZIP</button><span id="character-status" role="status"></span></div><input id="character-file" type="file" accept=".zip" hidden><p class="hint">切换只更换外观与动作。原生宿主、语音与当前任务保持连接。</p></div>
+        <label>所属宿主<select id="backend" disabled><option value="dsh">DSH</option></select></label>
+        <p id="backend-status" class="hint">正在检查任务入口…</p><button id="refresh-backends">重新检查后端</button>
+        <button id="last-task" type="button" disabled>查看最近任务</button>
+        <p id="wake-help">正在读取角色唤醒词…</p>
+        <label>输入设备<select id="device"><option value="">系统默认输入</option></select></label>
+        <label class="check"><input id="tts" type="checkbox" checked>角色声音（大肥鱼 TTS / 小鸡毛音效）</label>
+        <label>输入灵敏度<input type="range" id="threshold" min="0.005" max="0.08" step="0.001" value="0.018"></label>
+        <p class="hint">远控时选择有音量反馈的 UU 虚拟输入。数值越低越容易起音，过低也更容易把背景声识别为说话。</p>
+        <label>检查动作<select id="motion-select"></select></label><button id="preview-motion">播放所选动作</button>
+        <button id="demo">演示语音与任务状态</button><button id="reload-assets">重新读取动画清单</button>
+        <p id="asset-status"></p><p class="hint">演示只检查界面和状态切换，不会操作电脑或调用LLM。当前兼容接口返回最终回复，字幕跟随分句音频进度估算显示；上游逐token输出与精确字级时间戳尚未提供。</p>
+      </div>
+    </details>
+    <p id="error" role="alert" hidden></p>
+  </main>
+  <script type="module" src="/app.mjs"></script>
+</body></html>

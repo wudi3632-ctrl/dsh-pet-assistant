@@ -1,146 +1,90 @@
-<p align="center">
-  <img src="assets/logo.png" width="112" alt="dsh-pet-assistant logo">
-</p>
+# 大肥鱼 · 原创桌宠
 
-<h1 align="center">dsh-pet-assistant</h1>
+DSH 独立桌宠插件，不依赖第三方 dsh-pet。角色负责语音、动作、气泡与任务展示；DSH 原生 Agent 负责理解与执行。已接入60项原创透明WebM、768×768、24fps。
 
-<p align="center">
-  会听、会说、会陪你，也会拖着鼠标帮你操作 Windows 的可爱桌宠。
-</p>
+支持[切换桌宠形象与导入动作包](CHARACTERS.md)：大肥鱼保留，小鸡毛60动作透明WebM已本地接入。右键角色选择“更换桌宠形象…”。气泡和任务卡会避开屏幕边缘，角色可拖至工作区底部。
 
-<p align="center">
-  <img alt="Windows" src="https://img.shields.io/badge/Windows-10%20%2F%2011-2672EC?logo=windows11&logoColor=white">
-  <img alt="Node.js" src="https://img.shields.io/badge/Node.js-22%2B-339933?logo=nodedotjs&logoColor=white">
-  <img alt="Local ASR" src="https://img.shields.io/badge/ASR-sherpa--onnx-00A6A6">
-  <img alt="Streaming TTS" src="https://img.shields.io/badge/TTS-Qwen3--TTS-6C63FF">
-  <img alt="License" src="https://img.shields.io/badge/code-MIT-green">
-</p>
+让宿主Agent自行安装请先读[安装入口](INSTALL.md)及[Agent指令](AGENTS.md)。请使用本仓库0.3.2及之后版本；旧版dsh-pet派生实现已由独立插件替换。角色看不到时运行`node scripts/desktop.mjs --show`移回主屏中央，或双击托盘图标。
 
-<p align="center">
-  <a href="docs/INSTALL_WINDOWS.md">安装教程</a> ·
-  <a href="docs/MODELS_AND_VOICE.md">模型与音色</a> ·
-  <a href="docs/TROUBLESHOOTING.md">故障排查</a> ·
-  <a href="https://github.com/wudi3632-ctrl/dashifeiyu-workbench">大肥鱼工作台</a>
-</p>
+2026-11-25 起定位为 **DSH 专用桌宠插件**。任务由 DSH Session Controller 的专属会话自动接收、执行和汇报，不需要聊天持续等待。Codex/WorkBuddy 适配退出默认安装与运行，旧代码和报告仅保留在 legacy/multi-host。0.3.1 已注册独立 DSH bundle，插件详情页可直接启停/设置/打开任务会话。当前验收见 [ACCEPTANCE.md](ACCEPTANCE.md)。
 
-## 效果预览
+2026-11-25已在本机实际Electron窗口检查60项解码/播放及抽样Alpha、21次关键事件切换、idle两轮循环；详见[验收范围](ACCEPTANCE.md)。素材原始未批准标记保留，动作表现、完整接缝与真实指针牵引未据此自动放行。
 
-<p align="center">
-  <img src="docs/media/voice-assistant-demo.webp" width="960" alt="真实端到端演示：语音唤醒、本地 ASR、任务拆分、Windows 操作、TTS 回复与结果验收">
-</p>
+## 已实现
 
-<p align="center"><b>真实端到端演示：唤醒 → 本地 ASR → 任务拆分 → Windows 操作 → TTS / 气泡 → 4/4 验收</b></p>
+- 60项动作清单、可抢占动作调度、双视频切换、缺失及解码失败回退。
+- 浏览器预览与独立Electron透明置顶窗口；拖动、右键菜单、空白区点击穿透。
+- 本地Sherpa关键词唤醒、VAD切句、ASR、30秒连续会话；启动即预热并常驻内存，休眠不卸载，唤醒词随角色切换。
+- 单回合去重、播放期间只保留关键词检测、关键词打断、取消旧音频及迟到回复隔离。
+- 使用现有TTS服务音色，分句合成、预取下一句；气泡随分句音频进度估算推进，最多显示最近64个字符并自动收起。
+- 独立DSH插件、自动创建“桌宠语音”工作区与会话；执行前确认DSH客户端已切入真实会话，跟随当前模型并设low。
+- DSH保留完整任务结果；桌宠仅播报同一回合的简报，不额外发起摘要模型请求。
+- 真实工具开始、确认与失败事件；任务卡每回合重建，支持结构化计划和步骤进度。
 
-<table>
-  <tr>
-    <td align="center"><img src="docs/media/voice-demo-asr.png" width="420" alt="本地 ASR 识别语音指令"></td>
-    <td align="center"><img src="docs/media/voice-demo-task.png" width="420" alt="任务卡片拆分执行步骤"></td>
-  </tr>
-  <tr>
-    <td align="center"><b>本地 ASR 识别指令</b></td>
-    <td align="center"><b>任务卡片逐步执行</b></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="docs/media/voice-demo-action.png" width="420" alt="实际打开记事本并输入文字"></td>
-    <td align="center"><img src="docs/media/voice-demo-complete.png" width="420" alt="TTS 气泡回复并完成结果验收"></td>
-  </tr>
-  <tr>
-    <td align="center"><b>实际操作 Windows</b></td>
-    <td align="center"><b>TTS 回复与结果验收</b></td>
-  </tr>
-</table>
+**当前限制**：DSH桥接目前收集最终回复，从同回合结果取简短口播，再分句流式TTS，并非LLM token端到端流式。字级字幕使用音频时长估算，未接入强制对齐。默认DSH会话事件不包含完整todolist与鼠标轨迹；这些字段由未来工具适配器通过事件协议提供。桌宠不会根据“DSH回过话”推断Windows操作已成功。Windows操作能力取决于当前DSH已注册工具及其权限流程。
 
-> 演示来自项目真实运行：本地 sherpa-onnx 识别合成语音指令，Windows 白名单动作实际打开记事本并写入文字，任务卡片以真实返回结果完成验收，最后调用 Qwen3-TTS。视频仅做等待段裁切与加速，没有伪造功能状态；画面不包含账号、联系人、密钥或真实聊天。
+## 安装给自己或其他用户
 
-### 角色状态动画
-
-<table>
-  <tr>
-    <td align="center"><img src="docs/media/pet-happy.webp" width="280" alt="开心回应动画"></td>
-    <td align="center"><img src="docs/media/pet-thinking.webp" width="280" alt="思考状态动画"></td>
-    <td align="center"><img src="docs/media/pet-coding.webp" width="280" alt="写代码动画"></td>
-  </tr>
-  <tr>
-    <td align="center"><b>开心回应</b></td>
-    <td align="center"><b>倾听与思考</b></td>
-    <td align="center"><b>执行任务</b></td>
-  </tr>
-</table>
-
-> 角色动图直接取自项目实际动画资源。语音唤醒后，桌宠会用气泡和 TTS 同步回复；执行鼠标任务时会跑到光标旁，营造“拖着鼠标去操作”的效果。
-
-> [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet) 提供桌宠渲染、角色动画和基础交互；本仓库在保留上游 Git 历史的基础上新增语音链路、任务 UI、Windows 自动化与结果验证。代码使用 MIT License；仓库内沿用的桌宠动画、图片、字体和声音素材遵循上游的非商用与署名规则，不等同于 MIT 代码授权。
-
-## 能做什么
-
-- “大肥鱼 / 鲸鲸 / 小鲸鱼 / 小鲸”关键词唤醒，30 秒连续会话
-- sherpa-onnx KWS、VAD 与流式 Paraformer 中文 ASR
-- Qwen3-TTS / CosyVoice，文字气泡与语音同步、说话打断
-- 打开和激活软件、窗口、浏览器，以及鼠标键盘和常见 UI 操作
-- 任务拆分、任务卡片、确认步骤和执行结果验证
-- 自动化移动鼠标时由桌宠做出“拖着鼠标去操作”的演出
-
-典型指令包括：“打开 B 站”“在记事本里写一段自我介绍”“打开已经登录的微信并找到联系人”。需要发送消息、删除内容、付款或发布时，助手应停在最终动作前等待确认。
-
-桌面自动化并非系统权限边界。发消息、删除、付款、发布和提交表单等动作应保留人工确认；软件升级或 UI 变化后可能需要重新适配。
-
-## 选择安装方式
-
-| 目标 | 安装内容 |
-|---|---|
-| 先看桌宠或参与开发 | 本仓库 standalone 模式 |
-| 在 DSH 中日常使用 | [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) + 官方 `dsh-pet` + 本仓库覆盖部署 |
-| 语音唤醒与识别 | 再安装 sherpa-onnx 和两个模型 |
-| 可爱克隆音色、低延迟回复 | 再安装 `dashifeiyu-workbench` 的 Qwen3-TTS 服务 |
-
-完整教程见 [Windows 安装指南](docs/INSTALL_WINDOWS.md)。模型和音色见 [模型与语音指南](docs/MODELS_AND_VOICE.md)。遇到问题先看 [故障排查](docs/TROUBLESHOOTING.md)。
-
-## 最短开发启动
-
-要求 Windows 10/11、Node.js 22.12+ 和 pnpm：
+从[Releases](https://github.com/wudi3632-ctrl/dsh-pet-assistant/releases/tag/v0.3.2)下载 **0.3.2 Windows source ZIP**，解压到固定目录。已安装DSH和Node.js 22+后，在该目录运行：
 
 ```powershell
-git clone https://github.com/wudi3632-ctrl/dsh-pet-assistant.git
-cd dsh-pet-assistant
-corepack enable
-pnpm install --frozen-lockfile
-pnpm run build
-pnpm run standalone
+node scripts/install.mjs
 ```
 
-standalone 用于开发和查看桌宠，不会自动获得 DSH 的模型配置与完整 agent 能力。
+安装器自动找运行中的DSH与已有Electron；缺运行时则通过npm准备。进入 **DSH → 插件 → dsh-dashifeiyu-pet → 启用/显示桌宠** 即可先使用角色与文字任务。不需要旧dsh-pet，也不需要作者的配置或账号。
 
-## 部署到 DSH
-
-先通过 DSH 安装官方 `dsh-pet`，退出 DSH，再执行：
+需要语音输入时，安装Python 3.11并运行：
 
 ```powershell
-pnpm run build
-node scripts/deploy-local.mjs --destination "$HOME\.dsh\profiles\desktop\node_modules\dsh-pet"
+py -3.11 scripts/setup-speech.py
 ```
 
-脚本会先备份被替换的文件，不会停止 DSH；复制完成后需要重启 DSH。自定义 DSH 数据目录请把 `--destination` 换成实际插件目录。所有参数：
+脚本自动准备CPU版唤醒/ASR模型与独立Python环境，校验下载并写入本机设置。第一次需要联网，之后模型本地常驻。Qwen TTS为可选项，有完整服务示例、依赖安装与自备参考录音教程，不要求基础安装用户下载大模型。
+
+**完整教程：[INSTALL.md](INSTALL.md)**，包括下载正确版本、安装、首次任务、麦克风、离线模型、Qwen、诊断、更新和卸载。
 
 ```powershell
-node scripts/deploy-local.mjs --help
+npm run doctor
 ```
 
-## 配置诊断
+也可克隆本仓库后执行相同安装命令：`git clone https://github.com/wudi3632-ctrl/dsh-pet-assistant.git`。本版是独立实现，升级旧版前先在DSH中停用旧版插件，避免两个桌宠同时运行。
+
+纯浏览器开发预览可运行 `npm start` 后打开 http://127.0.0.1:57832/；透明桌面运行 `npm run desktop`。DSH任务仍需已启用插件和已连接的DSH客户端。
+
+本地配置保存在被Git忽略的settings.local.json，模型/虚拟环境在.runtime。不要将私人配置、参考录音或会话一起上传。程序与素材分发边界见[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)。
+
+## 替换原创动画
+
+1. 把WebM放入`public/assets/motions/`。
+2. 编辑`public/assets/motions.json`，找到同名动作ID并设置`enabled: true`。当前交付文件名为`dfy_<id>_v002_768_24.webm`。
+3. 点击“重新读取动画清单”；不需要重写动作调度代码。
+4. 以透明背景、实际脚底锚点及循环接缝验收。牵引动作需填写实测`handAnchor`再接通鼠标轨迹定位；现阶段只显示牵引状态占位，不会主动移动真实光标。
+
+当前交付为768×768、24fps、VP9 Alpha WebM、无音轨。动作清单在public/assets/motions.json。素材不可用才显示占位。
+
+## 事件接入
+
+`POST /api/events`支持本机工具适配器发送真实事件，需请求头`x-pet-client: 1`；前端通过`GET /api/events`接收。
+
+```json
+{"type":"task.plan","turnId":"当前回合ID","seq":3,"steps":[{"id":"open","label":"打开浏览器"}]}
+```
+
+```json
+{"type":"tool.progress","turnId":"当前回合ID","seq":4,"stepId":"open","status":"completed"}
+```
+
+回合ID必须对应当前回合，seq单调增加。支持`voice.*`、`turn.*`、`tool.started`、`tool.progress`、`approval.required`、`audio.*`、`pointer.move`、`pointer.arrived`、`pointer.click`。鼠标事件只表达执行器引起的操作，不追随用户自由移动鼠标；目前还没有从所有DSH Windows工具自动提取轨迹。桌面模式收到pointer事件时临时全窗穿透，避免操作点击角色。
+
+## 验证
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\doctor-windows.ps1
-pnpm test
-pnpm run typecheck
+npm test
+python tests/browser_acceptance.py
+python tests/live_voice_probe.py
+python tests/microphone_acceptance.py
 ```
 
-首次端到端验收顺序：启动 TTS → 启动 DSH → 说“大肥鱼” → 等待“正在听” → 说“打开记事本并写一段自我介绍” → 检查任务卡片、鼠标演出、气泡和 TTS。详见安装指南。
+后3项需要已启动浏览器版服务，浏览器测试还需要Python Playwright与Chromium，真实语音探测使用现有TTS服务和ffmpeg。
 
-## 仓库边界
-
-模型权重、Python/Node 运行时、个人克隆音色、参考干声、API 密钥、DSH 用户数据、联系人、聊天记录、日志和本机配置均不提交。模型应放在仓库外并通过环境变量指向。隐私和安全说明见 [PRIVACY.md](PRIVACY.md) 与 [SECURITY.md](SECURITY.md)。
-
-## License 与署名
-
-- 代码：[MIT License](LICENSE)
-- 上游：[PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet)
-- 媒体素材：遵循上游非商用与署名约束；公开分发前自行核对每项素材授权
+测试边界与结果见[ACCEPTANCE.md](ACCEPTANCE.md)。浏览器截图保存在被Git忽略的`artifacts/`。

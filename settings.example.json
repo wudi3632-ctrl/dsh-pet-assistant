@@ -1,0 +1,11 @@
+{
+  "agent": "http://127.0.0.1:57833",
+  "defaultBackend": "dsh",
+  "integration": "dsh-plugin",
+  "lockHost": "dsh",
+  "tts": {
+    "provider": "qwen",
+    "baseURL": "http://127.0.0.1:9883",
+    "voice": "default"
+  }
+}

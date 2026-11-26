@@ -1,0 +1,1447 @@
+{
+  "asset": "大肥鱼桌宠",
+  "profile": {
+    "width": 768,
+    "height": 768,
+    "fps": 24,
+    "codec": "vp9",
+    "container": "webm",
+    "alpha": true,
+    "audio": false
+  },
+  "release_status": "user_requested_current_delivery",
+  "runtime_check": {
+    "pass": false,
+    "environment": "本机 Chromium 147 仅预检；目标桌宠运行环境未验证",
+    "evidence": "audit/Chromium实测.json；audit/循环实测.json；audit/返修候选Chromium循环实测.json；audit/牵引返修Chromium循环实测.json；audit/说话返修Chromium循环实测.json；audit/滚轮右走Chromium循环实测.json"
+  },
+  "known_limitations": [
+    "stretch 踮脚较轻",
+    "session_end、bye 收手与腕摆未完成动作验收",
+    "真实桌宠应用未联调"
+  ],
+  "actions": [
+    {
+      "id": "idle",
+      "title": "自然待机",
+      "file": "actions/idle.webm",
+      "sha256": "1db63719eb184f82b0d3f41b8885b92169db2438b5001ee3d8d6749edb7465c6",
+      "frames": 96,
+      "loop": true,
+      "trigger": "展示且无其他事件。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；仅一次眨眼、嘴闭合，无叠影；仍需目标端确认切点与呼吸节奏。",
+        "loop": false
+      }
+    },
+    {
+      "id": "look",
+      "title": "好奇张望",
+      "file": "actions/look.webm",
+      "sha256": "d41cb1e8ac49d8d589a695497129a301677136b2190319e67b44174b12fc6756",
+      "frames": 72,
+      "loop": false,
+      "trigger": "低频随机闲置。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "stretch",
+      "title": "伸懒腰",
+      "file": "actions/stretch.webm",
+      "sha256": "edf6c1b760cf5e4bec71173657454db2d3a9f1d5482a4eeda84b73cf66f158bb",
+      "frames": 96,
+      "loop": false,
+      "trigger": "长时间闲置。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "双臂上伸已做出，踮脚小尺寸可辨度仍待复核。；audit/验收报告.md"
+      }
+    },
+    {
+      "id": "tidy",
+      "title": "整理裙摆",
+      "file": "actions/tidy.webm",
+      "sha256": "a3444cc7eefea5f6580c242f77e002db556fc53cde1762aff0e9697cd81bcaf6",
+      "frames": 72,
+      "loop": false,
+      "trigger": "低频闲置。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "yawn",
+      "title": "困倦哈欠",
+      "file": "actions/yawn.webm",
+      "sha256": "dd17ebe4d7697fb034d2e230f9677dec8a9e4a9499c7ee1da55e56a8c5501bb9",
+      "frames": 72,
+      "loop": false,
+      "trigger": "休息时段低频触发。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "sleep_enter",
+      "title": "准备睡觉",
+      "file": "actions/sleep_enter.webm",
+      "sha256": "96ea4d8d938659be4f9d0c7501ff14910f52046cae153f52091e78b7c4633655",
+      "frames": 96,
+      "loop": false,
+      "trigger": "休眠演出开始。",
+      "poses": "N → S",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "sleep_loop",
+      "title": "安静睡眠",
+      "file": "actions/sleep_loop.webm",
+      "sha256": "1a37f7b9060a2618e658dfd220596853b73acfe05ddb524f62a78421717a209f",
+      "frames": 96,
+      "loop": true,
+      "trigger": "休眠已进入。",
+      "poses": "S → S",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "sleep_exit",
+      "title": "醒来站起",
+      "file": "actions/sleep_exit.webm",
+      "sha256": "a2d95652b0118d15eae57d808ea178d5578281c8b75740ec4a51e6014eaf16dd",
+      "frames": 96,
+      "loop": false,
+      "trigger": "唤醒或用户点击睡眠角色。",
+      "poses": "S → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "wake",
+      "title": "听到名字",
+      "file": "actions/wake.webm",
+      "sha256": "e33e4a2588462f3ba71a9db7c4bdba38108a550c1a68e0ff33906a5e6aa86ee4",
+      "frames": 29,
+      "loop": false,
+      "trigger": "唤醒词通过验证。",
+      "poses": "N → L",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "listen",
+      "title": "专心听你说",
+      "file": "actions/listen.webm",
+      "sha256": "2fbecaebd528729432c4f70b3eff89542b680277af22d47552de407762cbe479",
+      "frames": 72,
+      "loop": true,
+      "trigger": "已确认用户在说话。",
+      "poses": "L → L",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "一次眨眼落在主表演窗口；耳侧手位维持；192 CSS px 预检连播十轮。audit/倾听返修Chromium循环实测.json；audit/验收报告.md",
+        "loop": false
+      }
+    },
+    {
+      "id": "listen_nod",
+      "title": "听懂一点",
+      "file": "actions/listen_nod.webm",
+      "sha256": "07670c6ebef1f1f23254efb238cb3c172c3097aac1b164a2ebab8d613a1d7745",
+      "frames": 36,
+      "loop": false,
+      "trigger": "长句中偶发语义反馈。",
+      "poses": "L → L",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "listen_end",
+      "title": "听完收手",
+      "file": "actions/listen_end.webm",
+      "sha256": "169fd5eb4781cfe90d2a3b260dafa29911c8bbacc8f76a3249f5003966e90df6",
+      "frames": 24,
+      "loop": false,
+      "trigger": "语音端点已确认。",
+      "poses": "L → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "unclear",
+      "title": "没有听清",
+      "file": "actions/unclear.webm",
+      "sha256": "18a3cd8c1e9fec3bdbceb76a616909d049a2a3e2af3dc515493b929d24ae3d0d",
+      "frames": 48,
+      "loop": false,
+      "trigger": "识别置信度不足需重说。",
+      "poses": "N → L",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "interrupt",
+      "title": "被用户打断",
+      "file": "actions/interrupt.webm",
+      "sha256": "44be94892a086d159d3fee3635734016e477e5a077f17d42f0b1df45e78e1d8c",
+      "frames": 19,
+      "loop": false,
+      "trigger": "有效语音打断当前播报。",
+      "poses": "T → L",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "session_wait",
+      "title": "等你接着说",
+      "file": "actions/session_wait.webm",
+      "sha256": "f317edbff65533f620ff07a996e77d6d3cb528bafbe4db818e741e5b20041d1a",
+      "frames": 96,
+      "loop": true,
+      "trigger": "连续会话开启但没有语音。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；仅一次眨眼、嘴闭合，无叠影；仍需目标端确认切点与呼吸节奏。",
+        "loop": false
+      }
+    },
+    {
+      "id": "session_end",
+      "title": "轻轻告别",
+      "file": "actions/session_end.webm",
+      "sha256": "3d911e2a31871b478654671b1b44e8fcb288c54e083b508098ed4eea3dd22508",
+      "frames": 48,
+      "loop": false,
+      "trigger": "最后一次交互后30秒休眠。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "候选腕摆更可辨，待区分最后外移及下降。；audit/验收报告.md"
+      }
+    },
+    {
+      "id": "think_enter",
+      "title": "开始思考",
+      "file": "actions/think_enter.webm",
+      "sha256": "98ce4e3b8f83d3acfa0dc21ea764ce3d7ce9e5a9588cc44d19f645a09fbf5096",
+      "frames": 24,
+      "loop": false,
+      "trigger": "任务提交且结果未返回。",
+      "poses": "N → K",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "think_loop",
+      "title": "安静思考",
+      "file": "actions/think_loop.webm",
+      "sha256": "6502c83da9dcbff505a3669abf0de946faa1ed1ad5891b828946514eaf745555",
+      "frames": 72,
+      "loop": true,
+      "trigger": "短暂推理等待。",
+      "poses": "K → K",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "think_exit",
+      "title": "想好啦",
+      "file": "actions/think_exit.webm",
+      "sha256": "533e25fb4db4a18043044ea55bc9f78866eed5a9ff91fd572c9159fbfaa10c90",
+      "frames": 24,
+      "loop": false,
+      "trigger": "响应已准备好。",
+      "poses": "K → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "task_ack",
+      "title": "收到任务",
+      "file": "actions/task_ack.webm",
+      "sha256": "97b5ac53b546626149c34cc956427fe1173de2399b554fbbfd1efc137c30db02",
+      "frames": 29,
+      "loop": false,
+      "trigger": "任务已接收准备执行。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "inspect",
+      "title": "观察屏幕",
+      "file": "actions/inspect.webm",
+      "sha256": "39e2e4975a5930b0a217bd4b596b4628e96508ea0d05ac8ab0ab00e4084371b1",
+      "frames": 72,
+      "loop": true,
+      "trigger": "读取屏幕或定位控件。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "working",
+      "title": "正在处理",
+      "file": "actions/working.webm",
+      "sha256": "c9d687079916b92d11f4c6ed7f4d5c1ca9b541c7637ec2d1c6bbe18dad6c9d2d",
+      "frames": 72,
+      "loop": true,
+      "trigger": "执行工具且无鼠标演出。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "approval",
+      "title": "等你确认",
+      "file": "actions/approval.webm",
+      "sha256": "35af3a6238f95360e298cfd12aceb4b94ed08927a699bda0af0428ccfee20912",
+      "frames": 72,
+      "loop": true,
+      "trigger": "执行器明确等待用户确认。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "pause",
+      "title": "暂停等待",
+      "file": "actions/pause.webm",
+      "sha256": "3831b1abdf7f1c81c37d6a1e9c8ae16eb8440c1d1359a68709fbaf7435b3a887",
+      "frames": 72,
+      "loop": true,
+      "trigger": "任务暂停或被用户接管。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "walk_left",
+      "title": "向左走",
+      "file": "actions/walk_left.webm",
+      "sha256": "d3d1c3d43ca743dd6402b1c5c50f56b1c6982318531b17c167ef1c096afea0dd",
+      "frames": 48,
+      "loop": true,
+      "trigger": "自动定位或回到停靠位。",
+      "poses": "WL → WL",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "walk_right",
+      "title": "向右走",
+      "file": "actions/walk_right.webm",
+      "sha256": "4cd77db47ac9899a3cb574b5c4a7d7542575566743a0968ad87659d907f99fda",
+      "frames": 48,
+      "loop": true,
+      "trigger": "自动定位或回到停靠位。",
+      "poses": "WR → WR",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；右向更稳；待核完整交替脚相和目标尺寸可辨度。",
+        "loop": false
+      }
+    },
+    {
+      "id": "pull_start_left",
+      "title": "向左牵引起手",
+      "file": "actions/pull_start_left.webm",
+      "sha256": "3cccc421ca56ffb34f066e50c619e0631cfaba9a19899a2cd757e14335fa27a0",
+      "frames": 24,
+      "loop": false,
+      "trigger": "执行器即将向左移动鼠标。",
+      "poses": "N → PL",
+      "interruptible": true,
+      "hand_anchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          263.0,
+          479.5
+        ],
+        "phase": "finish",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      },
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "鞋底已在脚部限定区域逐帧复核，手部尚未放行；audit/左牵引鞋底复核.json"
+      }
+    },
+    {
+      "id": "pull_left",
+      "title": "向左拖着鼠标跑",
+      "file": "actions/pull_left.webm",
+      "sha256": "d7c5399be343055e8f9a33aa8baddd9d7a65803a3214752b9950cbe007646a61",
+      "frames": 48,
+      "loop": true,
+      "trigger": "执行器持续向左移动鼠标。",
+      "poses": "PL → PL",
+      "interruptible": true,
+      "hand_anchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          263.0,
+          479.5
+        ],
+        "phase": "start",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      },
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "全周期保持现有握持和左向，握点及离线端点已量测。；audit/验收报告.md",
+        "loop": false
+      }
+    },
+    {
+      "id": "pull_start_right",
+      "title": "向右牵引起手",
+      "file": "actions/pull_start_right.webm",
+      "sha256": "986daea77f9042b6833ef0abdfec8ee95cc0b629f2af85efaa289edee8d5509e",
+      "frames": 24,
+      "loop": false,
+      "trigger": "执行器即将向右移动鼠标。",
+      "poses": "N → PR",
+      "interruptible": true,
+      "hand_anchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          445.5,
+          498.5
+        ],
+        "phase": "finish",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      },
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "pull_right",
+      "title": "向右拖着鼠标跑",
+      "file": "actions/pull_right.webm",
+      "sha256": "4f100fd7ee95596deefdd332415cc9f824b367f4a56757bcc29edc1b276b3ac0",
+      "frames": 48,
+      "loop": true,
+      "trigger": "执行器持续向右移动鼠标。",
+      "poses": "PR → PR",
+      "interruptible": true,
+      "hand_anchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          445.5,
+          498.5
+        ],
+        "phase": "start",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      },
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "全周期保持现有握持和右向，握点及离线端点已量测。；audit/验收报告.md",
+        "loop": false
+      }
+    },
+    {
+      "id": "pull_stop_left",
+      "title": "向左到达收势",
+      "file": "actions/pull_stop_left.webm",
+      "sha256": "76fa51a9fcc420c18cf0b01054f8869eb34e62a28293d48c00d0a912ce9b9533",
+      "frames": 24,
+      "loop": false,
+      "trigger": "鼠标到达目标且当前为PL。",
+      "poses": "PL → N",
+      "interruptible": true,
+      "hand_anchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          263.0,
+          479.5
+        ],
+        "phase": "start",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      },
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "鞋底已在脚部限定区域逐帧复核，手部尚未放行；audit/左牵引鞋底复核.json"
+      }
+    },
+    {
+      "id": "pull_stop_right",
+      "title": "向右到达收势",
+      "file": "actions/pull_stop_right.webm",
+      "sha256": "c00c47decb6c815feac2fca39c1e319b0706519c66ac71e386aeae03c9d5c35b",
+      "frames": 24,
+      "loop": false,
+      "trigger": "鼠标到达目标且当前为PR。",
+      "poses": "PR → N",
+      "interruptible": true,
+      "hand_anchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          445.5,
+          498.5
+        ],
+        "phase": "start",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      },
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "click",
+      "title": "轻按一下",
+      "file": "actions/click.webm",
+      "sha256": "d188d3481054048fa0b2ee63b82baac93eee93706e555d9a4459f1c43af53ac6",
+      "frames": 19,
+      "loop": false,
+      "trigger": "实际单击事件发生。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "frame_origin": 0,
+        "touch_points": [
+          {
+            "frame": 10,
+            "xy": [
+              270,
+              581
+            ]
+          }
+        ]
+      },
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": true,
+        "runtime": false,
+        "evidence": "第 10 帧一次触底；audit/dfy_click_v004_动作复核.jpg；audit/验收报告.md"
+      }
+    },
+    {
+      "id": "double_click",
+      "title": "轻按两下",
+      "file": "actions/double_click.webm",
+      "sha256": "ed997e907ab3fb9a05a02274c8e64c496679fdb4c69c4e4a79d476966edc1575",
+      "frames": 24,
+      "loop": false,
+      "trigger": "实际双击事件发生。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "frame_origin": 0,
+        "touch_points": [
+          {
+            "frame": 8,
+            "xy": [
+              270,
+              581
+            ]
+          },
+          {
+            "frame": 14,
+            "xy": [
+              270,
+              581
+            ]
+          }
+        ]
+      },
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": true,
+        "runtime": false,
+        "evidence": "第 8、14 帧两次触底；audit/dfy_double_click_v004_动作复核.jpg；audit/验收报告.md"
+      }
+    },
+    {
+      "id": "scroll",
+      "title": "拨动滚轮",
+      "file": "actions/scroll.webm",
+      "sha256": "5d928f6c62232c0118ec6ce9cbb1034f748ae18660f827a99b92951844cee6a8",
+      "frames": 36,
+      "loop": true,
+      "trigger": "实际滚动期间。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "逐帧见一次向下快拨，192 CSS px 连播十轮；audit/滚轮右走Chromium循环实测.json",
+        "loop": false
+      }
+    },
+    {
+      "id": "type",
+      "title": "认真输入",
+      "file": "actions/type.webm",
+      "sha256": "d400f4ff209e29c0bb668e9d0507cd5ebb04858783a6f202a7f9521918ca13e0",
+      "frames": 48,
+      "loop": true,
+      "trigger": "实际键盘输入期间。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "talk_neutral",
+      "title": "自然说话",
+      "file": "actions/talk_neutral.webm",
+      "sha256": "06544940f6826f0126fc87cbb3e45ee1eb1c98ac7ed6fbe005ac1fea4d71d960",
+      "frames": 72,
+      "loop": true,
+      "trigger": "中性语音实际开始播放。",
+      "poses": "T → T",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "复核三段口部开合、一次眨眼及闭口首尾，192 CSS px 连播十轮。；audit/验收报告.md",
+        "loop": false
+      }
+    },
+    {
+      "id": "talk_happy",
+      "title": "开心说话",
+      "file": "actions/talk_happy.webm",
+      "sha256": "9290c8135ffb8d3794af16d05f378717bb471116cd39a0621bb691160d1ea945",
+      "frames": 72,
+      "loop": true,
+      "trigger": "开心语气实际播放。",
+      "poses": "T → T",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "talk_soft",
+      "title": "温柔说话",
+      "file": "actions/talk_soft.webm",
+      "sha256": "1f8d956e82c1e5487aa95c1d2036fc1630bba706f912e6a55ca4f3b93676eaff",
+      "frames": 72,
+      "loop": true,
+      "trigger": "安慰或轻声语气实际播放。",
+      "poses": "T → T",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "talk_serious",
+      "title": "认真说话",
+      "file": "actions/talk_serious.webm",
+      "sha256": "96c5fb34911622b1ddfeb87dfeb3c43ffe977bab10d24aaa1f181495f04aa445",
+      "frames": 72,
+      "loop": true,
+      "trigger": "说明重要内容的语音播放。",
+      "poses": "T → T",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "talk_pout",
+      "title": "轻微不满说话",
+      "file": "actions/talk_pout.webm",
+      "sha256": "eea268f8b750709108d000ea1ff49721c11152160807e6b4fada9db9449f255d",
+      "frames": 72,
+      "loop": true,
+      "trigger": "轻度生气且适合角色语气。",
+      "poses": "T → T",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "talk_shy",
+      "title": "害羞说话",
+      "file": "actions/talk_shy.webm",
+      "sha256": "9eb00a95343a25f6f5438f345265c7f94544b053f949601f33f63dc3d2bd057e",
+      "frames": 72,
+      "loop": true,
+      "trigger": "害羞语气实际播放。",
+      "poses": "T → T",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "talk_surprise",
+      "title": "惊讶说话",
+      "file": "actions/talk_surprise.webm",
+      "sha256": "83a3202f13bc6a775b271c0ee8e4843aaf79d6c813c875d8665eb11beb4f9188",
+      "frames": 72,
+      "loop": true,
+      "trigger": "惊讶语气实际播放。",
+      "poses": "T → T",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "talk_end",
+      "title": "说完收势",
+      "file": "actions/talk_end.webm",
+      "sha256": "64f7636c95813a9facabe0f5dfaa846a6be151dc6c5b5db5f5e79f4aa5165d55",
+      "frames": 19,
+      "loop": false,
+      "trigger": "当前语音播放完成。",
+      "poses": "T → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "success",
+      "title": "完成啦",
+      "file": "actions/success.webm",
+      "sha256": "7abb46c049646823ef802ba5482aa14cf927f600745c7543ca875ce4799575ee",
+      "frames": 48,
+      "loop": false,
+      "trigger": "任务结果已验证成功。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "partial",
+      "title": "还差一点",
+      "file": "actions/partial.webm",
+      "sha256": "3c296736079923fb90ac68044d771b20e6356485c0810db639ddd8957f950e90",
+      "frames": 48,
+      "loop": false,
+      "trigger": "只完成部分任务。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "failure",
+      "title": "遇到困难",
+      "file": "actions/failure.webm",
+      "sha256": "68d6d82cd000704629366ef98abecad698ee7c12827e6e4d47b3c852ee1b4af1",
+      "frames": 48,
+      "loop": false,
+      "trigger": "执行失败且准备汇报。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "retry",
+      "title": "再试一次",
+      "file": "actions/retry.webm",
+      "sha256": "a054a03a2d737c9c0d6a35dcfdbc4decac34ba4adb8714bd18548082dca637dd",
+      "frames": 36,
+      "loop": false,
+      "trigger": "确实开始重试。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "cancel",
+      "title": "收到取消",
+      "file": "actions/cancel.webm",
+      "sha256": "1dd0fa4e40d723f02388e78ed9ae08b22dfd533e2a03b133226d5ceb6b9fe4d5",
+      "frames": 36,
+      "loop": false,
+      "trigger": "任务已取消。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "offline",
+      "title": "连接断开",
+      "file": "actions/offline.webm",
+      "sha256": "c54c56f1416baaf6d99722850558f8d2204c24a37ec5f2ee09161c02d6924383",
+      "frames": 48,
+      "loop": false,
+      "trigger": "服务不可达。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "recover",
+      "title": "恢复连接",
+      "file": "actions/recover.webm",
+      "sha256": "3b22894fcdcc0562ea91a8d2d69bdb2201767a351bc165dad70213c1ff88fcf6",
+      "frames": 36,
+      "loop": false,
+      "trigger": "连接恢复且检查通过。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "attention",
+      "title": "温和提醒",
+      "file": "actions/attention.webm",
+      "sha256": "ba2fe2be3580a6402eb265c8f4a7b2fe7d7750f0660551ca750e72028dc1f60b",
+      "frames": 48,
+      "loop": false,
+      "trigger": "真实提醒事件到达。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "确认两轮腕摆和收手；audit/dfy_attention_v003_手腕复核.jpg；audit/验收报告.md"
+      }
+    },
+    {
+      "id": "greet",
+      "title": "见面招呼",
+      "file": "actions/greet.webm",
+      "sha256": "3f9ed06b642f7b11ffe24a62a2d25dfa2ef9eac92a6c482281581b48bea9b80b",
+      "frames": 72,
+      "loop": false,
+      "trigger": "桌宠启动就绪。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "确认两轮腕摆、屈膝礼和回 N；audit/dfy_greet_v003_收势复核.jpg；audit/验收报告.md"
+      }
+    },
+    {
+      "id": "bye",
+      "title": "退出告别",
+      "file": "actions/bye.webm",
+      "sha256": "692e93fcf3e3133f2de0d924b6461166d689d0de8b91e9f78eb6b17b65507f30",
+      "frames": 48,
+      "loop": false,
+      "trigger": "退出演出开始。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "挥手、收手及末段低头可见，仍须复核完整挥手次数。；audit/验收报告.md"
+      }
+    },
+    {
+      "id": "pet",
+      "title": "摸摸头",
+      "file": "actions/pet.webm",
+      "sha256": "624897340d57a104ecacf88b75e0ab8821a334309254cc0056b2c9c731b26316",
+      "frames": 48,
+      "loop": false,
+      "trigger": "用户轻触头部。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "poke",
+      "title": "戳戳脸",
+      "file": "actions/poke.webm",
+      "sha256": "6ccf09ef86b1781cd56303da12fa227cb04571465bcb245b0bd636b5980e30e9",
+      "frames": 36,
+      "loop": false,
+      "trigger": "用户轻触脸颊。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "lift",
+      "title": "被提起来",
+      "file": "actions/lift.webm",
+      "sha256": "37d8601f34b12cabdb562bf45042ffe1c2788d57d44e2cd1b511babd39db505d",
+      "frames": 24,
+      "loop": false,
+      "trigger": "用户开始拖拽角色。",
+      "poses": "N → H",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；最小留边 47 px，保留抬起悬空。待与拖动、落地联调。"
+      }
+    },
+    {
+      "id": "held",
+      "title": "被拖动中",
+      "file": "actions/held.webm",
+      "sha256": "0bfc7997d1865af88849889fb81660893307f42ec03b06627a243842348bc909",
+      "frames": 48,
+      "loop": true,
+      "trigger": "用户持续拖拽角色。",
+      "poses": "H → H",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      }
+    },
+    {
+      "id": "land",
+      "title": "放回桌面",
+      "file": "actions/land.webm",
+      "sha256": "5a0a04727ef333cf213da8ec50a6c6bc789ba5bee64607f9eff32558c3915e82",
+      "frames": 36,
+      "loop": false,
+      "trigger": "用户松开拖拽。",
+      "poses": "H → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    },
+    {
+      "id": "delight",
+      "title": "开心小庆祝",
+      "file": "actions/delight.webm",
+      "sha256": "9441ec7cbcb94ff58931611b132e1fda0058498aafd67dabc21640a2c33bfc8f",
+      "frames": 72,
+      "loop": false,
+      "trigger": "用户明确夸奖或重要里程碑。",
+      "poses": "N → N",
+      "interruptible": true,
+      "hand_anchor": null,
+      "approved": false,
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      }
+    }
+  ]
+}

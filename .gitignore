@@ -1,39 +1,15 @@
 node_modules/
-.superpowers/
-lib/
-coverage/
 *.log
-runtime/**/*.pid
-runtime/**/*.lock
+.env
+coverage/
+artifacts/
+settings.local.json
+*.bak
+start-*.vbs
+dsh-bridge.generated.yml
+.runtime/
 
-# Local speech runtimes and model weights
-models/
-speech-models/
-.venv/
-venv/
+dist/
 __pycache__/
 *.py[cod]
-*.onnx
-*.pt
-*.pth
-*.safetensors
-*.bin
-
-# Personal voices, generated audio and local state
-voices/
-reference-audio/
-generated/
-state/
-sessions/
-*.wav
-*.mp3
-*.flac
-
-# Credentials and machine-local configuration
-.env
-.env.*
-!.env.example
-config.local.*
-*.local.json
-*.pid
-*.lock
+public/assets/characters/

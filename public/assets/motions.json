@@ -1,0 +1,1781 @@
+{
+  "version": 2,
+  "width": 768,
+  "height": 768,
+  "fps": 24,
+  "motions": [
+    {
+      "id": "idle",
+      "label": "自然待机",
+      "category": "日常陪伴",
+      "trigger": "展示且无其他事件",
+      "loop": true,
+      "durationMs": 4000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_idle_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；仅一次眨眼、嘴闭合，无叠影；仍需目标端确认切点与呼吸节奏。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "1db63719eb184f82b0d3f41b8885b92169db2438b5001ee3d8d6749edb7465c6"
+    },
+    {
+      "id": "look",
+      "label": "好奇张望",
+      "category": "日常陪伴",
+      "trigger": "低频随机闲置",
+      "loop": false,
+      "durationMs": 3000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_look_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "d41cb1e8ac49d8d589a695497129a301677136b2190319e67b44174b12fc6756"
+    },
+    {
+      "id": "stretch",
+      "label": "伸懒腰",
+      "category": "日常陪伴",
+      "trigger": "长时间闲置",
+      "loop": false,
+      "durationMs": 4000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_stretch_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "双臂上伸已做出，踮脚小尺寸可辨度仍待复核。；audit/验收报告.md"
+      },
+      "approved": false,
+      "sha256": "edf6c1b760cf5e4bec71173657454db2d3a9f1d5482a4eeda84b73cf66f158bb"
+    },
+    {
+      "id": "tidy",
+      "label": "整理裙摆",
+      "category": "日常陪伴",
+      "trigger": "低频闲置",
+      "loop": false,
+      "durationMs": 3000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_tidy_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "a3444cc7eefea5f6580c242f77e002db556fc53cde1762aff0e9697cd81bcaf6"
+    },
+    {
+      "id": "yawn",
+      "label": "困倦哈欠",
+      "category": "日常陪伴",
+      "trigger": "休息时段低频触发",
+      "loop": false,
+      "durationMs": 3000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_yawn_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "dd17ebe4d7697fb034d2e230f9677dec8a9e4a9499c7ee1da55e56a8c5501bb9"
+    },
+    {
+      "id": "sleep_enter",
+      "label": "准备睡觉",
+      "category": "日常陪伴",
+      "trigger": "休眠演出开始",
+      "loop": false,
+      "durationMs": 4000.0,
+      "from": "N",
+      "to": "S",
+      "src": "/assets/motions/dfy_sleep_enter_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "96ea4d8d938659be4f9d0c7501ff14910f52046cae153f52091e78b7c4633655"
+    },
+    {
+      "id": "sleep_loop",
+      "label": "安静睡眠",
+      "category": "日常陪伴",
+      "trigger": "休眠已进入",
+      "loop": true,
+      "durationMs": 4000.0,
+      "from": "S",
+      "to": "S",
+      "src": "/assets/motions/dfy_sleep_loop_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "1a37f7b9060a2618e658dfd220596853b73acfe05ddb524f62a78421717a209f"
+    },
+    {
+      "id": "sleep_exit",
+      "label": "醒来站起",
+      "category": "日常陪伴",
+      "trigger": "唤醒或用户点击睡眠角色",
+      "loop": false,
+      "durationMs": 4000.0,
+      "from": "S",
+      "to": "N",
+      "src": "/assets/motions/dfy_sleep_exit_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "a2d95652b0118d15eae57d808ea178d5578281c8b75740ec4a51e6014eaf16dd"
+    },
+    {
+      "id": "wake",
+      "label": "听到名字",
+      "category": "唤醒与倾听",
+      "trigger": "唤醒词通过验证",
+      "loop": false,
+      "durationMs": 1208.3333333333333,
+      "from": "N",
+      "to": "L",
+      "src": "/assets/motions/dfy_wake_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "e33e4a2588462f3ba71a9db7c4bdba38108a550c1a68e0ff33906a5e6aa86ee4"
+    },
+    {
+      "id": "listen",
+      "label": "专心听你说",
+      "category": "唤醒与倾听",
+      "trigger": "已确认用户在说话",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "L",
+      "to": "L",
+      "src": "/assets/motions/dfy_listen_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "一次眨眼落在主表演窗口；耳侧手位维持；192 CSS px 预检连播十轮。audit/倾听返修Chromium循环实测.json；audit/验收报告.md",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "2fbecaebd528729432c4f70b3eff89542b680277af22d47552de407762cbe479"
+    },
+    {
+      "id": "listen_nod",
+      "label": "听懂一点",
+      "category": "唤醒与倾听",
+      "trigger": "长句中偶发语义反馈",
+      "loop": false,
+      "durationMs": 1500.0,
+      "from": "L",
+      "to": "L",
+      "src": "/assets/motions/dfy_listen_nod_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "07670c6ebef1f1f23254efb238cb3c172c3097aac1b164a2ebab8d613a1d7745"
+    },
+    {
+      "id": "listen_end",
+      "label": "听完收手",
+      "category": "唤醒与倾听",
+      "trigger": "语音端点已确认",
+      "loop": false,
+      "durationMs": 1000.0,
+      "from": "L",
+      "to": "N",
+      "src": "/assets/motions/dfy_listen_end_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "169fd5eb4781cfe90d2a3b260dafa29911c8bbacc8f76a3249f5003966e90df6"
+    },
+    {
+      "id": "unclear",
+      "label": "没有听清",
+      "category": "唤醒与倾听",
+      "trigger": "识别置信度不足需重说",
+      "loop": false,
+      "durationMs": 2000.0,
+      "from": "N",
+      "to": "L",
+      "src": "/assets/motions/dfy_unclear_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "18a3cd8c1e9fec3bdbceb76a616909d049a2a3e2af3dc515493b929d24ae3d0d"
+    },
+    {
+      "id": "interrupt",
+      "label": "被用户打断",
+      "category": "唤醒与倾听",
+      "trigger": "有效语音打断当前播报",
+      "loop": false,
+      "durationMs": 791.6666666666666,
+      "from": "T",
+      "to": "L",
+      "src": "/assets/motions/dfy_interrupt_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "44be94892a086d159d3fee3635734016e477e5a077f17d42f0b1df45e78e1d8c"
+    },
+    {
+      "id": "session_wait",
+      "label": "等你接着说",
+      "category": "唤醒与倾听",
+      "trigger": "连续会话开启但没有语音",
+      "loop": true,
+      "durationMs": 4000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_session_wait_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；仅一次眨眼、嘴闭合，无叠影；仍需目标端确认切点与呼吸节奏。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "f317edbff65533f620ff07a996e77d6d3cb528bafbe4db818e741e5b20041d1a"
+    },
+    {
+      "id": "session_end",
+      "label": "轻轻告别",
+      "category": "唤醒与倾听",
+      "trigger": "最后一次交互后30秒休眠",
+      "loop": false,
+      "durationMs": 2000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_session_end_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "候选腕摆更可辨，待区分最后外移及下降。；audit/验收报告.md"
+      },
+      "approved": false,
+      "sha256": "3d911e2a31871b478654671b1b44e8fcb288c54e083b508098ed4eea3dd22508"
+    },
+    {
+      "id": "think_enter",
+      "label": "开始思考",
+      "category": "思考与任务状态",
+      "trigger": "任务提交且结果未返回",
+      "loop": false,
+      "durationMs": 1000.0,
+      "from": "N",
+      "to": "K",
+      "src": "/assets/motions/dfy_think_enter_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "98ce4e3b8f83d3acfa0dc21ea764ce3d7ce9e5a9588cc44d19f645a09fbf5096"
+    },
+    {
+      "id": "think_loop",
+      "label": "安静思考",
+      "category": "思考与任务状态",
+      "trigger": "短暂推理等待",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "K",
+      "to": "K",
+      "src": "/assets/motions/dfy_think_loop_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "6502c83da9dcbff505a3669abf0de946faa1ed1ad5891b828946514eaf745555"
+    },
+    {
+      "id": "think_exit",
+      "label": "想好啦",
+      "category": "思考与任务状态",
+      "trigger": "响应已准备好",
+      "loop": false,
+      "durationMs": 1000.0,
+      "from": "K",
+      "to": "N",
+      "src": "/assets/motions/dfy_think_exit_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "533e25fb4db4a18043044ea55bc9f78866eed5a9ff91fd572c9159fbfaa10c90"
+    },
+    {
+      "id": "task_ack",
+      "label": "收到任务",
+      "category": "思考与任务状态",
+      "trigger": "任务已接收准备执行",
+      "loop": false,
+      "durationMs": 1208.3333333333333,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_task_ack_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "97b5ac53b546626149c34cc956427fe1173de2399b554fbbfd1efc137c30db02"
+    },
+    {
+      "id": "inspect",
+      "label": "观察屏幕",
+      "category": "思考与任务状态",
+      "trigger": "读取屏幕或定位控件",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_inspect_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "39e2e4975a5930b0a217bd4b596b4628e96508ea0d05ac8ab0ab00e4084371b1"
+    },
+    {
+      "id": "working",
+      "label": "正在处理",
+      "category": "思考与任务状态",
+      "trigger": "执行工具且无鼠标演出",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_working_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "c9d687079916b92d11f4c6ed7f4d5c1ca9b541c7637ec2d1c6bbe18dad6c9d2d"
+    },
+    {
+      "id": "approval",
+      "label": "等你确认",
+      "category": "思考与任务状态",
+      "trigger": "执行器明确等待用户确认",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_approval_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "35af3a6238f95360e298cfd12aceb4b94ed08927a699bda0af0428ccfee20912"
+    },
+    {
+      "id": "pause",
+      "label": "暂停等待",
+      "category": "思考与任务状态",
+      "trigger": "任务暂停或被用户接管",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_pause_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "3831b1abdf7f1c81c37d6a1e9c8ae16eb8440c1d1359a68709fbaf7435b3a887"
+    },
+    {
+      "id": "walk_left",
+      "label": "向左走",
+      "category": "鼠标操作演出",
+      "trigger": "自动定位或回到停靠位",
+      "loop": true,
+      "durationMs": 2000.0,
+      "from": "WL",
+      "to": "WL",
+      "src": "/assets/motions/dfy_walk_left_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "d3d1c3d43ca743dd6402b1c5c50f56b1c6982318531b17c167ef1c096afea0dd"
+    },
+    {
+      "id": "walk_right",
+      "label": "向右走",
+      "category": "鼠标操作演出",
+      "trigger": "自动定位或回到停靠位",
+      "loop": true,
+      "durationMs": 2000.0,
+      "from": "WR",
+      "to": "WR",
+      "src": "/assets/motions/dfy_walk_right_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；右向更稳；待核完整交替脚相和目标尺寸可辨度。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "4cd77db47ac9899a3cb574b5c4a7d7542575566743a0968ad87659d907f99fda"
+    },
+    {
+      "id": "pull_start_left",
+      "label": "向左牵引起手",
+      "category": "鼠标操作演出",
+      "trigger": "执行器即将向左移动鼠标",
+      "loop": false,
+      "durationMs": 1000.0,
+      "from": "N",
+      "to": "PL",
+      "src": "/assets/motions/dfy_pull_start_left_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "handAnchor": {
+        "x": 0.3424479166666667,
+        "y": 0.6243489583333334,
+        "phase": "finish",
+        "verified": false
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "鞋底已在脚部限定区域逐帧复核，手部尚未放行；audit/左牵引鞋底复核.json"
+      },
+      "approved": false,
+      "sha256": "3cccc421ca56ffb34f066e50c619e0631cfaba9a19899a2cd757e14335fa27a0",
+      "sourceHandAnchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          263.0,
+          479.5
+        ],
+        "phase": "finish",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      }
+    },
+    {
+      "id": "pull_left",
+      "label": "向左拖着鼠标跑",
+      "category": "鼠标操作演出",
+      "trigger": "执行器持续向左移动鼠标",
+      "loop": true,
+      "durationMs": 2000.0,
+      "from": "PL",
+      "to": "PL",
+      "src": "/assets/motions/dfy_pull_left_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "handAnchor": {
+        "x": 0.3424479166666667,
+        "y": 0.6243489583333334,
+        "phase": "start",
+        "verified": false
+      },
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "全周期保持现有握持和左向，握点及离线端点已量测。；audit/验收报告.md",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "d7c5399be343055e8f9a33aa8baddd9d7a65803a3214752b9950cbe007646a61",
+      "sourceHandAnchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          263.0,
+          479.5
+        ],
+        "phase": "start",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      }
+    },
+    {
+      "id": "pull_start_right",
+      "label": "向右牵引起手",
+      "category": "鼠标操作演出",
+      "trigger": "执行器即将向右移动鼠标",
+      "loop": false,
+      "durationMs": 1000.0,
+      "from": "N",
+      "to": "PR",
+      "src": "/assets/motions/dfy_pull_start_right_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "handAnchor": {
+        "x": 0.580078125,
+        "y": 0.6490885416666666,
+        "phase": "finish",
+        "verified": false
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "986daea77f9042b6833ef0abdfec8ee95cc0b629f2af85efaa289edee8d5509e",
+      "sourceHandAnchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          445.5,
+          498.5
+        ],
+        "phase": "finish",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      }
+    },
+    {
+      "id": "pull_right",
+      "label": "向右拖着鼠标跑",
+      "category": "鼠标操作演出",
+      "trigger": "执行器持续向右移动鼠标",
+      "loop": true,
+      "durationMs": 2000.0,
+      "from": "PR",
+      "to": "PR",
+      "src": "/assets/motions/dfy_pull_right_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "handAnchor": {
+        "x": 0.580078125,
+        "y": 0.6490885416666666,
+        "phase": "start",
+        "verified": false
+      },
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "全周期保持现有握持和右向，握点及离线端点已量测。；audit/验收报告.md",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "4f100fd7ee95596deefdd332415cc9f824b367f4a56757bcc29edc1b276b3ac0",
+      "sourceHandAnchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          445.5,
+          498.5
+        ],
+        "phase": "start",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      }
+    },
+    {
+      "id": "pull_stop_left",
+      "label": "向左到达收势",
+      "category": "鼠标操作演出",
+      "trigger": "鼠标到达目标且当前为PL",
+      "loop": false,
+      "durationMs": 1000.0,
+      "from": "PL",
+      "to": "N",
+      "src": "/assets/motions/dfy_pull_stop_left_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "handAnchor": {
+        "x": 0.3424479166666667,
+        "y": 0.6243489583333334,
+        "phase": "start",
+        "verified": false
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "鞋底已在脚部限定区域逐帧复核，手部尚未放行；audit/左牵引鞋底复核.json"
+      },
+      "approved": false,
+      "sha256": "76fa51a9fcc420c18cf0b01054f8869eb34e62a28293d48c00d0a912ce9b9533",
+      "sourceHandAnchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          263.0,
+          479.5
+        ],
+        "phase": "start",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      }
+    },
+    {
+      "id": "pull_stop_right",
+      "label": "向右到达收势",
+      "category": "鼠标操作演出",
+      "trigger": "鼠标到达目标且当前为PR",
+      "loop": false,
+      "durationMs": 1000.0,
+      "from": "PR",
+      "to": "N",
+      "src": "/assets/motions/dfy_pull_stop_right_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "handAnchor": {
+        "x": 0.580078125,
+        "y": 0.6490885416666666,
+        "phase": "start",
+        "verified": false
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "c00c47decb6c815feac2fca39c1e319b0706519c66ac71e386aeae03c9d5c35b",
+      "sourceHandAnchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "xy": [
+          445.5,
+          498.5
+        ],
+        "phase": "start",
+        "evidence": "audit/左右牵引握点逐帧复测.json"
+      }
+    },
+    {
+      "id": "click",
+      "label": "轻按一下",
+      "category": "鼠标操作演出",
+      "trigger": "实际单击事件发生",
+      "loop": false,
+      "durationMs": 791.6666666666666,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_click_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": true,
+        "runtime": false,
+        "evidence": "第 10 帧一次触底；audit/dfy_click_v004_动作复核.jpg；audit/验收报告.md"
+      },
+      "approved": false,
+      "sha256": "d188d3481054048fa0b2ee63b82baac93eee93706e555d9a4459f1c43af53ac6",
+      "sourceHandAnchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "frame_origin": 0,
+        "touch_points": [
+          {
+            "frame": 10,
+            "xy": [
+              270,
+              581
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "double_click",
+      "label": "轻按两下",
+      "category": "鼠标操作演出",
+      "trigger": "实际双击事件发生",
+      "loop": false,
+      "durationMs": 1000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_double_click_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": true,
+        "runtime": false,
+        "evidence": "第 8、14 帧两次触底；audit/dfy_double_click_v004_动作复核.jpg；audit/验收报告.md"
+      },
+      "approved": false,
+      "sha256": "ed997e907ab3fb9a05a02274c8e64c496679fdb4c69c4e4a79d476966edc1575",
+      "sourceHandAnchor": {
+        "coordinate_system": "source_pixels_x_right_y_down",
+        "frame_origin": 0,
+        "touch_points": [
+          {
+            "frame": 8,
+            "xy": [
+              270,
+              581
+            ]
+          },
+          {
+            "frame": 14,
+            "xy": [
+              270,
+              581
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "scroll",
+      "label": "拨动滚轮",
+      "category": "鼠标操作演出",
+      "trigger": "实际滚动期间",
+      "loop": true,
+      "durationMs": 1500.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_scroll_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "逐帧见一次向下快拨，192 CSS px 连播十轮；audit/滚轮右走Chromium循环实测.json",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "5d928f6c62232c0118ec6ce9cbb1034f748ae18660f827a99b92951844cee6a8"
+    },
+    {
+      "id": "type",
+      "label": "认真输入",
+      "category": "鼠标操作演出",
+      "trigger": "实际键盘输入期间",
+      "loop": true,
+      "durationMs": 2000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_type_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "d400f4ff209e29c0bb668e9d0507cd5ebb04858783a6f202a7f9521918ca13e0"
+    },
+    {
+      "id": "talk_neutral",
+      "label": "自然说话",
+      "category": "说话与表情",
+      "trigger": "中性语音实际开始播放",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "T",
+      "to": "T",
+      "src": "/assets/motions/dfy_talk_neutral_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "复核三段口部开合、一次眨眼及闭口首尾，192 CSS px 连播十轮。；audit/验收报告.md",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "06544940f6826f0126fc87cbb3e45ee1eb1c98ac7ed6fbe005ac1fea4d71d960"
+    },
+    {
+      "id": "talk_happy",
+      "label": "开心说话",
+      "category": "说话与表情",
+      "trigger": "开心语气实际播放",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "T",
+      "to": "T",
+      "src": "/assets/motions/dfy_talk_happy_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "9290c8135ffb8d3794af16d05f378717bb471116cd39a0621bb691160d1ea945"
+    },
+    {
+      "id": "talk_soft",
+      "label": "温柔说话",
+      "category": "说话与表情",
+      "trigger": "安慰或轻声语气实际播放",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "T",
+      "to": "T",
+      "src": "/assets/motions/dfy_talk_soft_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "1f8d956e82c1e5487aa95c1d2036fc1630bba706f912e6a55ca4f3b93676eaff"
+    },
+    {
+      "id": "talk_serious",
+      "label": "认真说话",
+      "category": "说话与表情",
+      "trigger": "说明重要内容的语音播放",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "T",
+      "to": "T",
+      "src": "/assets/motions/dfy_talk_serious_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "96c5fb34911622b1ddfeb87dfeb3c43ffe977bab10d24aaa1f181495f04aa445"
+    },
+    {
+      "id": "talk_pout",
+      "label": "轻微不满说话",
+      "category": "说话与表情",
+      "trigger": "轻度生气且适合角色语气",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "T",
+      "to": "T",
+      "src": "/assets/motions/dfy_talk_pout_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "eea268f8b750709108d000ea1ff49721c11152160807e6b4fada9db9449f255d"
+    },
+    {
+      "id": "talk_shy",
+      "label": "害羞说话",
+      "category": "说话与表情",
+      "trigger": "害羞语气实际播放",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "T",
+      "to": "T",
+      "src": "/assets/motions/dfy_talk_shy_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "9eb00a95343a25f6f5438f345265c7f94544b053f949601f33f63dc3d2bd057e"
+    },
+    {
+      "id": "talk_surprise",
+      "label": "惊讶说话",
+      "category": "说话与表情",
+      "trigger": "惊讶语气实际播放",
+      "loop": true,
+      "durationMs": 3000.0,
+      "from": "T",
+      "to": "T",
+      "src": "/assets/motions/dfy_talk_surprise_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "83a3202f13bc6a775b271c0ee8e4843aaf79d6c813c875d8665eb11beb4f9188"
+    },
+    {
+      "id": "talk_end",
+      "label": "说完收势",
+      "category": "说话与表情",
+      "trigger": "当前语音播放完成",
+      "loop": false,
+      "durationMs": 791.6666666666666,
+      "from": "T",
+      "to": "N",
+      "src": "/assets/motions/dfy_talk_end_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "64f7636c95813a9facabe0f5dfaa846a6be151dc6c5b5db5f5e79f4aa5165d55"
+    },
+    {
+      "id": "success",
+      "label": "完成啦",
+      "category": "结果与异常",
+      "trigger": "任务结果已验证成功",
+      "loop": false,
+      "durationMs": 2000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_success_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "7abb46c049646823ef802ba5482aa14cf927f600745c7543ca875ce4799575ee"
+    },
+    {
+      "id": "partial",
+      "label": "还差一点",
+      "category": "结果与异常",
+      "trigger": "只完成部分任务",
+      "loop": false,
+      "durationMs": 2000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_partial_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "3c296736079923fb90ac68044d771b20e6356485c0810db639ddd8957f950e90"
+    },
+    {
+      "id": "failure",
+      "label": "遇到困难",
+      "category": "结果与异常",
+      "trigger": "执行失败且准备汇报",
+      "loop": false,
+      "durationMs": 2000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_failure_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "68d6d82cd000704629366ef98abecad698ee7c12827e6e4d47b3c852ee1b4af1"
+    },
+    {
+      "id": "retry",
+      "label": "再试一次",
+      "category": "结果与异常",
+      "trigger": "确实开始重试",
+      "loop": false,
+      "durationMs": 1500.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_retry_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "a054a03a2d737c9c0d6a35dcfdbc4decac34ba4adb8714bd18548082dca637dd"
+    },
+    {
+      "id": "cancel",
+      "label": "收到取消",
+      "category": "结果与异常",
+      "trigger": "任务已取消",
+      "loop": false,
+      "durationMs": 1500.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_cancel_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "1dd0fa4e40d723f02388e78ed9ae08b22dfd533e2a03b133226d5ceb6b9fe4d5"
+    },
+    {
+      "id": "offline",
+      "label": "连接断开",
+      "category": "结果与异常",
+      "trigger": "服务不可达",
+      "loop": false,
+      "durationMs": 2000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_offline_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "c54c56f1416baaf6d99722850558f8d2204c24a37ec5f2ee09161c02d6924383"
+    },
+    {
+      "id": "recover",
+      "label": "恢复连接",
+      "category": "结果与异常",
+      "trigger": "连接恢复且检查通过",
+      "loop": false,
+      "durationMs": 1500.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_recover_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "3b22894fcdcc0562ea91a8d2d69bdb2201767a351bc165dad70213c1ff88fcf6"
+    },
+    {
+      "id": "attention",
+      "label": "温和提醒",
+      "category": "结果与异常",
+      "trigger": "真实提醒事件到达",
+      "loop": false,
+      "durationMs": 2000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_attention_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "确认两轮腕摆和收手；audit/dfy_attention_v003_手腕复核.jpg；audit/验收报告.md"
+      },
+      "approved": false,
+      "sha256": "ba2fe2be3580a6402eb265c8f4a7b2fe7d7750f0660551ca750e72028dc1f60b"
+    },
+    {
+      "id": "greet",
+      "label": "见面招呼",
+      "category": "用户互动与出入场",
+      "trigger": "桌宠启动就绪",
+      "loop": false,
+      "durationMs": 3000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_greet_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": true,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "确认两轮腕摆、屈膝礼和回 N；audit/dfy_greet_v003_收势复核.jpg；audit/验收报告.md"
+      },
+      "approved": false,
+      "sha256": "3f9ed06b642f7b11ffe24a62a2d25dfa2ef9eac92a6c482281581b48bea9b80b"
+    },
+    {
+      "id": "bye",
+      "label": "退出告别",
+      "category": "用户互动与出入场",
+      "trigger": "退出演出开始",
+      "loop": false,
+      "durationMs": 2000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_bye_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "挥手、收手及末段低头可见，仍须复核完整挥手次数。；audit/验收报告.md"
+      },
+      "approved": false,
+      "sha256": "692e93fcf3e3133f2de0d924b6461166d689d0de8b91e9f78eb6b17b65507f30"
+    },
+    {
+      "id": "pet",
+      "label": "摸摸头",
+      "category": "用户互动与出入场",
+      "trigger": "用户轻触头部",
+      "loop": false,
+      "durationMs": 2000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_pet_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "624897340d57a104ecacf88b75e0ab8821a334309254cc0056b2c9c731b26316"
+    },
+    {
+      "id": "poke",
+      "label": "戳戳脸",
+      "category": "用户互动与出入场",
+      "trigger": "用户轻触脸颊",
+      "loop": false,
+      "durationMs": 1500.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_poke_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "6ccf09ef86b1781cd56303da12fa227cb04571465bcb245b0bd636b5980e30e9"
+    },
+    {
+      "id": "lift",
+      "label": "被提起来",
+      "category": "用户互动与出入场",
+      "trigger": "用户开始拖拽角色",
+      "loop": false,
+      "durationMs": 1000.0,
+      "from": "N",
+      "to": "H",
+      "src": "/assets/motions/dfy_lift_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；最小留边 47 px，保留抬起悬空。待与拖动、落地联调。"
+      },
+      "approved": false,
+      "sha256": "37d8601f34b12cabdb562bf45042ffe1c2788d57d44e2cd1b511babd39db505d"
+    },
+    {
+      "id": "held",
+      "label": "被拖动中",
+      "category": "用户互动与出入场",
+      "trigger": "用户持续拖拽角色",
+      "loop": true,
+      "durationMs": 2000.0,
+      "from": "H",
+      "to": "H",
+      "src": "/assets/motions/dfy_held_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。",
+        "loop": false
+      },
+      "approved": false,
+      "sha256": "0bfc7997d1865af88849889fb81660893307f42ec03b06627a243842348bc909"
+    },
+    {
+      "id": "land",
+      "label": "放回桌面",
+      "category": "用户互动与出入场",
+      "trigger": "用户松开拖拽",
+      "loop": false,
+      "durationMs": 1500.0,
+      "from": "H",
+      "to": "N",
+      "src": "/assets/motions/dfy_land_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "5a0a04727ef333cf213da8ec50a6c6bc789ba5bee64607f9eff32558c3915e82"
+    },
+    {
+      "id": "delight",
+      "label": "开心小庆祝",
+      "category": "用户互动与出入场",
+      "trigger": "用户明确夸奖或重要里程碑",
+      "loop": false,
+      "durationMs": 3000.0,
+      "from": "N",
+      "to": "N",
+      "src": "/assets/motions/dfy_delight_v002_768_24.webm",
+      "enabled": true,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "review": {
+        "technical": true,
+        "motion": false,
+        "identity": false,
+        "transition": false,
+        "anchors": false,
+        "runtime": false,
+        "evidence": "audit/验收报告.md；第一轮抽帧未发现明确返修项；未完成目标端与衔接放行。"
+      },
+      "approved": false,
+      "sha256": "9441ec7cbcb94ff58931611b132e1fda0058498aafd67dabc21640a2c33bfc8f"
+    }
+  ],
+  "assetRelease": "current_delivery_v002",
+  "runtimeVerified": false,
+  "knownLimitations": [
+    "stretch 踮脚较轻",
+    "session_end、bye 收手与腕摆未完成动作验收",
+    "真实桌宠应用未联调"
+  ]
+}

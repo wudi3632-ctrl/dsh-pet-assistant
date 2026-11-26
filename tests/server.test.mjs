@@ -1,0 +1,30 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import http from 'node:http';
+import { createPetServer } from '../server.mjs';
+test('静态资源、后端转发、同源限制与事件格式', async t => {
+  let forwarded;
+  const backend = http.createServer(async (req, res) => {
+    let body = ''; for await (const chunk of req) body += chunk;
+    forwarded = { url: req.url, body, auth: req.headers.authorization };
+    res.setHeader('content-type', 'application/json');
+    res.end(JSON.stringify({ ok: true, text: '你好' }));
+  });
+  await new Promise(r => backend.listen(0, '127.0.0.1', r));
+  const server = createPetServer({ agent: `http://127.0.0.1:${backend.address().port}`, token: 'test-only-token' });
+  await new Promise(r => server.listen(0, '127.0.0.1', r));
+  t.after(() => { server.closeAllConnections(); server.close(); backend.closeAllConnections(); backend.close(); });
+  const base = `http://127.0.0.1:${server.address().port}`;
+  assert.equal((await fetch(base)).status, 200);
+  const assets = await (await fetch(base + '/assets/motions.json')).json(); assert.equal(assets.motions.length, 60);
+  assert.equal((await fetch(base + '/api/health')).status, 200);
+  assert.equal((await fetch(base + '/api/turn', { method: 'POST', body: '{}' })).status, 403);
+  assert.equal((await fetch(base + '/api/turn', { method: 'POST', headers: { 'x-pet-client': '1', origin: 'https://evil.example' }, body: '{}' })).status, 403);
+  const reply = await (await fetch(base + '/api/turn', { method: 'POST', headers: { 'x-pet-client': '1' }, body: JSON.stringify({ text: '你好', turnId: 't1' }) })).json();
+  assert.equal(reply.text, '你好'); assert.equal(forwarded.url, '/turn');
+  assert.equal(forwarded.auth, undefined);
+  assert.equal((await fetch(base + '/api/events', { method: 'POST', headers: { 'x-pet-client': '1' }, body: JSON.stringify({ type: 'voice.wake' }) })).status, 200);
+  assert.equal((await fetch(base + '/api/events', { method: 'POST', headers: { 'x-pet-client': '1' }, body: '{}' })).status, 400);
+  assert.equal((await fetch(base + '/%2e%2e%5cpackage.json')).status, 403);
+});
+test('禁止远程服务地址', () => assert.throws(() => createPetServer({ backend: 'https://example.com' }), /本机/));

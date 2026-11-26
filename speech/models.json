@@ -1,0 +1,45 @@
+[
+  {
+    "id": "asr",
+    "directory": "streaming-paraformer-bilingual-int8",
+    "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-streaming-paraformer-bilingual-zh-en.tar.bz2",
+    "files": {
+      "tokens.txt": {
+        "sha256": "59aba8873a2ed1e122c25fee421e25f283b63290efbde85c1f01a853d83cb6e6",
+        "bytes": 75756
+      },
+      "encoder.int8.onnx": {
+        "sha256": "81a70226a8934e6ed92aa1d4fc486b428b5398e2f2619ed4897b7294cab90e9a",
+        "bytes": 165462184
+      },
+      "decoder.int8.onnx": {
+        "sha256": "f3cca9f77bb9d93c8fcbfb63ae617b6b1ee96818df3aa3b151c40658fe38594f",
+        "bytes": 71664561
+      }
+    }
+  },
+  {
+    "id": "kws",
+    "directory": "sherpa-onnx-kws-zipformer-zh-en-3M-2025-12-20",
+    "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/kws-models/sherpa-onnx-kws-zipformer-zh-en-3M-2025-12-20.tar.bz2",
+    "files": {
+      "tokens.txt": {
+        "sha256": "2d3f32311f9b692b964da3c90e830258d3e78e013cb0c992dbfb15cd5a1a71b0",
+        "bytes": 1928
+      },
+      "encoder-epoch-13-avg-2-chunk-16-left-64.int8.onnx": {
+        "sha256": "408bbd740838c42d5bf6d1c5b80b3c88b616c7860b92d980328b5b068c76ae48",
+        "bytes": 4599656
+      },
+      "decoder-epoch-13-avg-2-chunk-16-left-64.onnx": {
+        "sha256": "63a22dd60f40fff082ac3e09afa507f6787da36df76ded2fbe145fa233e22c21",
+        "bytes": 759829
+      },
+      "joiner-epoch-13-avg-2-chunk-16-left-64.int8.onnx": {
+        "sha256": "190d4067b4cc20b72a42a1916e69d92052000fb7051a427ebb1bc72a69207dc1",
+        "bytes": 86629
+      }
+    },
+    "archiveSha256": "68447f4fbc67e70eee3a93961f36e81e98f47aef73ce7e7ca00885c6cd3616a6"
+  }
+]
