@@ -8,12 +8,21 @@
 
 这是独立的 Windows DSH 插件，包名为 `dsh-dashifeiyu-pet`。从旧版升级时，先在 DSH 中停用原先的桌宠插件。
 
+## 角色
+
+| 大肥鱼 | 小鸡毛 |
+| --- | --- |
+| ![大肥鱼的实际待机动作帧](docs/images/dashifeiyu-profile.webp) | ![小鸡毛的实际待机动作帧](docs/images/xiao-jimao-profile.webp) |
+| **默认角色，随插件提供**。60 个原创动作，支持配置 Qwen TTS 播报。 | **本地导入示例**。60 个动作，唤醒词为「小鸡毛」。本机使用狗叫音效。 |
+
+小鸡毛是「线条小狗」角色，此处展示导入后的外观。公开安装包提供大肥鱼，其他角色可通过动作包 ZIP 导入。见[更换角色](CHARACTERS.md)。
+
 ## 效果预览
 
 ![唤醒、倾听、思考、回应、完成五个原创动作的实际帧](docs/images/motion-gallery.webp)
 
 <details>
-<summary>播放回应动作</summary>
+<summary>播放大肥鱼的回应动作</summary>
 
 ![大肥鱼开心说话的循环动画，来自插件的实际 WebM](docs/images/talk-happy.gif)
 
