@@ -1,29 +1,42 @@
 # 大肥鱼 · 原创桌宠
 
-DSH 独立桌宠插件，不依赖第三方 dsh-pet。角色负责语音、动作、气泡与任务展示；DSH 原生 Agent 负责理解与执行。已接入60项原创透明WebM、768×768、24fps。
+![大肥鱼桌宠，支持本地语音唤醒与 DSH 会话任务](docs/images/hero.webp)
 
-支持[切换桌宠形象与导入动作包](CHARACTERS.md)：大肥鱼保留，小鸡毛60动作透明WebM已本地接入。右键角色选择“更换桌宠形象…”。气泡和任务卡会避开屏幕边缘，角色可拖至工作区底部。
+[下载 Windows 安装包](https://github.com/wudi3632-ctrl/dsh-pet-assistant/releases/latest) · [安装教程](INSTALL.md) · [更换角色](CHARACTERS.md)
 
-让宿主Agent自行安装请先读[安装入口](INSTALL.md)及[Agent指令](AGENTS.md)。请使用本仓库0.3.2及之后版本；旧版dsh-pet派生实现已由独立插件替换。角色看不到时运行`node scripts/desktop.mjs --show`移回主屏中央，或双击托盘图标。
+叫一声「大肥鱼」，它会显示正在倾听，把识别到的任务交给 DSH 的「桌宠语音」会话。处理完成后，可以通过气泡查看简报，配置 Qwen TTS 后也能听到播报。
 
-2026-11-25 起定位为 **DSH 专用桌宠插件**。任务由 DSH Session Controller 的专属会话自动接收、执行和汇报，不需要聊天持续等待。Codex/WorkBuddy 适配退出默认安装与运行，旧代码和报告仅保留在 legacy/multi-host。0.3.1 已注册独立 DSH bundle，插件详情页可直接启停/设置/打开任务会话。当前验收见 [ACCEPTANCE.md](ACCEPTANCE.md)。
+这是独立的 Windows DSH 插件，包名为 `dsh-dashifeiyu-pet`。从旧版升级时，先在 DSH 中停用原先的桌宠插件。
 
-2026-11-25已在本机实际Electron窗口检查60项解码/播放及抽样Alpha、21次关键事件切换、idle两轮循环；详见[验收范围](ACCEPTANCE.md)。素材原始未批准标记保留，动作表现、完整接缝与真实指针牵引未据此自动放行。
+## 效果预览
 
-## 已实现
+![唤醒、倾听、思考、回应、完成五个原创动作的实际帧](docs/images/motion-gallery.webp)
 
-- 60项动作清单、可抢占动作调度、双视频切换、缺失及解码失败回退。
-- 浏览器预览与独立Electron透明置顶窗口；拖动、右键菜单、空白区点击穿透。
-- 本地Sherpa关键词唤醒、VAD切句、ASR、30秒连续会话；启动即预热并常驻内存，休眠不卸载，唤醒词随角色切换。
-- 单回合去重、播放期间只保留关键词检测、关键词打断、取消旧音频及迟到回复隔离。
-- 使用现有TTS服务音色，分句合成、预取下一句；气泡随分句音频进度估算推进，最多显示最近64个字符并自动收起。
-- 独立DSH插件、自动创建“桌宠语音”工作区与会话；执行前确认DSH客户端已切入真实会话，跟随当前模型并设low。
-- DSH保留完整任务结果；桌宠仅播报同一回合的简报，不额外发起摘要模型请求。
-- 真实工具开始、确认与失败事件；任务卡每回合重建，支持结构化计划和步骤进度。
+<details>
+<summary>播放回应动作</summary>
 
-**当前限制**：DSH桥接目前收集最终回复，从同回合结果取简短口播，再分句流式TTS，并非LLM token端到端流式。字级字幕使用音频时长估算，未接入强制对齐。默认DSH会话事件不包含完整todolist与鼠标轨迹；这些字段由未来工具适配器通过事件协议提供。桌宠不会根据“DSH回过话”推断Windows操作已成功。Windows操作能力取决于当前DSH已注册工具及其权限流程。
+![大肥鱼开心说话的循环动画，来自插件的实际 WebM](docs/images/talk-happy.gif)
 
-## 安装给自己或其他用户
+</details>
+
+| 语音唤醒与气泡 | 可展开的任务卡 |
+| --- | --- |
+| ![大肥鱼正在听你说话，气泡显示我在听，继续说](docs/images/voice-preview.webp) | ![大肥鱼正在处理任务，右侧展开文件清单任务的步骤](docs/images/task-preview.webp) |
+
+![大肥鱼正在回应，气泡随播报显示文件清单整理好啦](docs/images/reply-preview.webp)
+
+*截图来自新版界面，使用演示语音状态和任务数据。任务完整结果留在 DSH 会话里。*
+
+## 功能
+
+- **桌面陪伴**　60 个原创透明 WebM 动作，支持拖动、右键菜单、透明区点击穿透，以及导入其他角色的动作包。
+- **本地语音输入**　Sherpa 唤醒和 ASR 启动时预热，连续对话空闲 30 秒后回到待唤醒状态。
+- **DSH 会话接力**　确认客户端打开「桌宠语音」会话后再派发任务。任务卡可展开，回复后会自动收起。
+- **结果简报**　同一回合生成简报，气泡随语音播放进度更新。Qwen TTS 可按需配置，也可仅使用气泡。
+
+通用 Windows 窗口操作取决于 DSH 工具、权限和审批。当前实测通过的是文件任务，记事本与资源管理器的窗口验收仍有待解决。见[验收范围](ACCEPTANCE.md)。
+
+## 安装
 
 从[Releases](https://github.com/wudi3632-ctrl/dsh-pet-assistant/releases/tag/v0.3.2)下载 **0.3.2 Windows source ZIP**，解压到固定目录。已安装DSH和Node.js 22+后，在该目录运行：
 
@@ -80,11 +93,7 @@ npm run doctor
 
 ```powershell
 npm test
-python tests/browser_acceptance.py
-python tests/live_voice_probe.py
-python tests/microphone_acceptance.py
+python -m unittest discover -s tests -p test_setup_speech.py
 ```
-
-后3项需要已启动浏览器版服务，浏览器测试还需要Python Playwright与Chromium，真实语音探测使用现有TTS服务和ffmpeg。
 
 测试边界与结果见[ACCEPTANCE.md](ACCEPTANCE.md)。浏览器截图保存在被Git忽略的`artifacts/`。
